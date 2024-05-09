@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class UpcomingWidget extends StatelessWidget{
+  const UpcomingWidget({super.key});
+
   
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
@@ -22,14 +24,14 @@ class UpcomingWidget extends StatelessWidget{
             ],
           ),
         ),
-      SizedBox(height: 15),
+      const SizedBox(height: 15),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
           for(int i=1; i < 5; i++)
           Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.asset(

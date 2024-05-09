@@ -4,6 +4,8 @@ import 'package:projeto_modulo_4/widgets/NewMoviesWiget.dart';
 import 'package:projeto_modulo_4/widgets/UpcomingWidget.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +13,7 @@ class HomePage extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
                 child: Row(
                   children: [
@@ -31,25 +33,25 @@ class HomePage extends StatelessWidget {
               ),
               Container(
                 height: 60,
-                padding: EdgeInsets.all(9),
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.all(9),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: Color(0xFF292B37),
+                  color: const Color(0xFF292B37),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.search,
                       color: Colors.white54,
                       size: 30,
                     ),
                     Container(
                       width: 300,
-                      margin: EdgeInsets.only(left: 5),
+                      margin: const EdgeInsets.only(left: 5),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Buscar",
                           hintStyle: TextStyle(color: Colors.white54),
@@ -59,15 +61,15 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
-              UpcomingWidget(),
-              SizedBox(height: 35),
-              NewMoviesWiget(),
+              const SizedBox(height: 30),
+              const UpcomingWidget(),
+              const SizedBox(height: 35),
+               NewMoviesWiget(),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar: const CustomNavBar(),
     );
   }
 }

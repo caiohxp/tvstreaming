@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class NewMoviesWiget extends StatelessWidget {
+   NewMoviesWiget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
+         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
@@ -31,12 +33,12 @@ class NewMoviesWiget extends StatelessWidget {
                   child: Container(
                       width: 190,
                       height: 300,
-                      margin: EdgeInsets.only(left: 10),
+                      margin:  EdgeInsets.only(left: 10),
                       decoration: BoxDecoration(
                         color: Color(0xFF292B37),
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0xFF292B37).withOpacity(0.5),
+                            color:  Color(0xFF292B37).withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 6,
                           ),
@@ -46,7 +48,7 @@ class NewMoviesWiget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ClipRRect(
-                            borderRadius: const BorderRadius.only(
+                            borderRadius:  BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
                             ),
@@ -57,7 +59,7 @@ class NewMoviesWiget extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          const Padding(
+                          Padding(
                               padding: EdgeInsets.symmetric(
                                 vertical: 10,
                                 horizontal: 5,
