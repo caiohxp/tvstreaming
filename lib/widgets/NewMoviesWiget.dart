@@ -70,7 +70,7 @@ class NewMoviesWiget extends StatelessWidget {
                                   Text(
                                     "Mamonas Assasinas",
                                     style: TextStyle(
-                                     color: Color(0xFF00A470),
+                                      color: Color(0xFF00A470),
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                     ),
