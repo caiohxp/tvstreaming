@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_modulo_4/pages/CategoryPage.dart';
 import 'package:projeto_modulo_4/pages/HomePages.dart';
+import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +31,8 @@ class _MyAppState extends State<MyApp> {
         ),
         routes: {
           "/": (context) => HomePage(),
-          "categoryPage":(context) => CategoryPage(),
-          });
+          "categoryPage": (context) => CategoryPage(),
+          "movieDetailsPage": (context) => MovieDetailsPage(movie: null),
+        });
   }
 }
