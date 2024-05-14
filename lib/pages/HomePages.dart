@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        "FlutterSquad",
+                        "Cinesquad",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,

@@ -5,41 +5,46 @@ import 'package:projeto_modulo_4/widgets/Movie_model.dart';
 class NewSeriesWidget extends StatelessWidget {
   static List<MovielModel> main_movies_list = [
     MovielModel(
-        "Marvel",
-        "Ficção",
-        "https://s2.glbimg.com/2QnEImPirqci_2qnvpXlvHeYwIk=/620x350/e.glbimg.com/og/ed/f/original/2019/04/26/1.jpg",
-        1.1,
-        ""),
-    MovielModel(
-        "Capitao",
-        "Ação",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgXX4PNN4ZPSmOiuHVQyNlo-Mlip8bOlZDjO5dRAZmQA&s",
-        9.9,
-        ""),
-    MovielModel(
-        "Mulher",
-        "Comedia",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8e3JTsJ4aZNTJDYT8AW5S1kSwJLqSxC7OWnGHeCgQJg&s",
-        9,
-        ""),
-    MovielModel(
-        "Homem",
-        "Heroi",
-        "https://s2.glbimg.com/2QnEImPirqci_2qnvpXlvHeYwIk=/620x350/e.glbimg.com/og/ed/f/original/2019/04/26/1.jpg",
-        1,
-        ""),
-    MovielModel(
-        "Marvel",
+        
+        "The Boys",
         "Drama",
-        "https://s2.glbimg.com/2QnEImPirqci_2qnvpXlvHeYwIk=/620x350/e.glbimg.com/og/ed/f/original/2019/04/26/1.jpg",
-        9.8,
+        "https://rukminim2.flixcart.com/image/750/900/l407mvk0/poster/e/z/5/large-the-boys-poster-18-x-12-inch-300-gsm-t0141-original-imagezaw5ezbgptp.jpeg?q=20&crop=false",
+        8.8,
+        "The Boys se passa em um universo onde indivíduos superpoderosos são reconhecidos como heróis pelo público em geral e pertencem à poderosa corporação Vought International, que os comercializa e monetiza."),
+
+        
+        
+       
+    MovielModel(
+        "Mr. Robot ",
+        "Drama",
+        "https://assets.papelpop.com/wp-content/uploads/2019/08/mr-robot-season-four.jpg",
+        8.9,
         ""),
     MovielModel(
-        "Marvel",
+        "Origem",
+        "Ficção Fientífica",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpkFAwd5mgPkkXI35aRqUIfqD-OzIwsGUYc1DmvlsP3A&s",
+        5.5,
+        ""),
+    MovielModel(
+        "Arcajo",
         "Drama",
-        "https://media.gettyimages.com/id/951460824/pt/foto/paris-france-a-dc-comics-universe-poster-batman-superman-wonder-woman-the-joker-is-displayed.jpg?s=612x612&w=gi&k=20&c=tzU0NznQL7tM7MCIz5dEBZmAuKNxg5RL0CH-lZ3Tbi8=",
-        2.9,
-        "")
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgr91zohv8Qtwu6j1gKLw6tSAHyMkQZZeZCPKo5hGJ5g&s",
+        6.8,
+        ""),
+    MovielModel(
+        "The Last of Us",
+        "Ficção Fientífica ",
+        "https://m.media-amazon.com/images/I/719fH-oJd2L._AC_UF1000,1000_QL80_.jpg",
+        9.7,
+        ""),
+    // MovielModel(
+    //     "Marvel",
+    //     "Drama",
+    //     "https://media.gettyimages.com/id/951460824/pt/foto/paris-france-a-dc-comics-universe-poster-batman-superman-wonder-woman-the-joker-is-displayed.jpg?s=612x612&w=gi&k=20&c=tzU0NznQL7tM7MCIz5dEBZmAuKNxg5RL0CH-lZ3Tbi8=",
+    //     2.9,
+    //     "")
   ];
 
   List<MovielModel> display_list = List.from(main_movies_list);
