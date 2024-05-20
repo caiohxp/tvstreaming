@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:projeto_modulo_4/widgets/MovieGenres_model.dart';
 import 'package:projeto_modulo_4/widgets/Movie_model.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<MovieModel> movies = [];
   List<SerieModel> series = [];
+  List<MovieGenreModel> genres = [];
   final String apiKey =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTY2ZjkyOWI1ZTJjMGNjMjhiMTdjMGI3NDFkMDQ1OSIsInN1YiI6IjY2NGFiZmQ0NjU4YmViMmIwNjk2MjI2MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KTfaE78Lmqqh-iqVRaYOpvYufyIRvin7LhlHVRlht8s';
 

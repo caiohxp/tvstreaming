@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
+import 'package:projeto_modulo_4/widgets/MovieGenres_model.dart';
 import 'package:projeto_modulo_4/widgets/Movie_model.dart';
 
 class UpcomingWidget extends StatelessWidget {
