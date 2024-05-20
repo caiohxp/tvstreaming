@@ -1,15 +1,109 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:projeto_modulo_4/widgets/CustomNavBar.dart';
+import 'package:http/http.dart' as http;
+import 'package:projeto_modulo_4/widgets/Movie_model.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
+import 'package:projeto_modulo_4/widgets/Serie_model.dart';
 import 'package:projeto_modulo_4/widgets/UpcomingWidget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<MovieModel> movies = [];
+  List<SerieModel> series = [];
+  final String apiKey =
+      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTY2ZjkyOWI1ZTJjMGNjMjhiMTdjMGI3NDFkMDQ1OSIsInN1YiI6IjY2NGFiZmQ0NjU4YmViMmIwNjk2MjI2MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KTfaE78Lmqqh-iqVRaYOpvYufyIRvin7LhlHVRlht8s';
+
+  @override
+  void initState() {
+    super.initState();
+    upComingMovies();
+    fetchMovies();
+    fetchSeries();
+  }
+
+  Future<void> upComingMovies() async {
+    final response = await http.get(
+      Uri.parse(
+          'https://developer.themoviedb.org/reference/movie-upcoming-list'),
+      headers: {
+        'Authorization': 'Bearer $apiKey',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+
+      setState(() {
+        movies =
+            results.map((movieJson) => MovieModel.fromJson(movieJson)).toList();
+      });
+
+      print(
+          'Movies Attributes: ${json.encode(results[0])}'); // Print título do primeiro filme
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
+
+  Future<void> fetchMovies() async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/movie/now_playing'),
+      headers: {
+        'Authorization': 'Bearer $apiKey',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+
+      setState(() {
+        movies =
+            results.map((movieJson) => MovieModel.fromJson(movieJson)).toList();
+      });
+
+      print(
+          'Movies Attributes: ${json.encode(results[0])}'); // Print título do primeiro filme
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
+
+  Future<void> fetchSeries() async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/tv/airing_today'),
+      headers: {
+        'Authorization': 'Bearer $apiKey',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+
+      setState(() {
+        series =
+            results.map((serieJson) => SerieModel.fromJson(serieJson)).toList();
+      });
+
+      print(
+          'Series Attributes: ${json.encode(results[0])}'); // Print título do primeiro filme
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView( 
+        child: ListView(
           children: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
@@ -61,11 +155,11 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            UpcomingWidget(),
+            UpcomingWidget(movies: movies),
             SizedBox(height: 30),
-            NewMoviesWidget(),
+            NewMoviesWidget(movies: movies),
             SizedBox(height: 30),
-            NewSeriesWidget(),
+            NewSeriesWidget(series: series),
             SizedBox(height: 40),
           ],
         ),
