@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../widgets/Movie_model.dart';
+import '../widgets/Serie_model.dart';
 
-class MovieDetailsPage extends StatelessWidget {
-  final MovieModel? movie;
+class SerieDetailsPage extends StatelessWidget {
+  final SerieModel? serie;
 
-  const MovieDetailsPage({Key? key, this.movie}) : super(key: key);
+  const SerieDetailsPage({Key? key, this.serie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class MovieDetailsPage extends StatelessWidget {
                   height: 400, // Altura da imagem do filme
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage('${movie?.backdropPath ?? ''}]'),
+                      image: NetworkImage('${serie?.backdropPath ?? ''}]'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -91,7 +91,7 @@ class MovieDetailsPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
               child: Text(
-                '${movie?.title ?? ''}',
+                '${serie?.name ?? ''}',
                 style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
@@ -101,7 +101,7 @@ class MovieDetailsPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
               child: Text(
-                '${movie?.releaseDate ?? ''} - ${movie?.voteAverage ?? ''}',
+                '${serie?.firstAirDate ?? ''} - ${serie?.voteAverage ?? ''}',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -124,7 +124,7 @@ class MovieDetailsPage extends StatelessWidget {
               margin: const EdgeInsets.only(
                   left: 50, top: 0, bottom: 100, right: 50),
               child: Text(
-                '${movie?.overview}',
+                '${serie?.overview}',
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
