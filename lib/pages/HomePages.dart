@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Failed to load movies and series'));
+              return Center(child: Text('Erro ao carregar Filmes e Séries'));
             } else if (snapshot.hasData) {
               final movies = snapshot.data!['movies'] as List<MovieModel>;
               final series = snapshot.data!['series'] as List<SerieModel>;
