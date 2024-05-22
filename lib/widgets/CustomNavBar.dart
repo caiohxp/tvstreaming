@@ -6,13 +6,13 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 65,
+      height: 55,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: const BoxDecoration(
           color: Color(0xFF292B37),
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           )),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,7 +32,7 @@ class CustomNavBar extends StatelessWidget {
               Navigator.pushNamed(context, "categoryPage");
             },
             child: const Icon(
-              Icons.category,
+              Icons.favorite,
               size: 35,
               color: Color(0xFF00A470),
             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
-import 'package:projeto_modulo_4/widgets/Movie_model.dart';
-import 'package:projeto_modulo_4/widgets/Serie_model.dart';
+import 'package:projeto_modulo_4/model/Serie_model.dart';
 
 class NewSeriesWidget extends StatelessWidget {
   final List<SerieModel> series;
@@ -28,10 +27,15 @@ class NewSeriesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: series.map((serie) => SerieItem(serie: serie)).toList(),
+        // Alterado para usar ListView.builder
+        SizedBox(
+          height: 340, // Define a altura do ListView horizontal
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: series.length,
+            itemBuilder: (context, index) {
+              return SerieItem(serie: series[index]);
+            },
           ),
         ),
       ],

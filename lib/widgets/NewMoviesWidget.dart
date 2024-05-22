@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/widgets/Movie_model.dart';
+import 'package:projeto_modulo_4/model/Movie_model.dart';
 
 class NewMoviesWidget extends StatelessWidget {
   final List<MovieModel> movies;
@@ -27,12 +27,19 @@ class NewMoviesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15),
-        SingleChildScrollView(
+        SizedBox(
+          height: 340,
+          child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: movies.map((movie) => MovieItem(movie: movie)).toList(),
+          itemCount: movies.length,
+          itemBuilder: (context, index) {
+            return MovieItem(movie: movies[index]);
+          },
+          )  
+          
+          
           ),
-        ),
+        
       ],
     );
   }

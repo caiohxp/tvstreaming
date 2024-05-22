@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import '../widgets/SerieGenres_model.dart';
-import '../widgets/Serie_model.dart';
+import 'package:flutter/widgets.dart';
+import 'package:projeto_modulo_4/model/SerieGenres_model.dart';
+import '../model/Serie_model.dart';
 
 class SerieDetailsPage extends StatefulWidget {
   final SerieModel? serie;
