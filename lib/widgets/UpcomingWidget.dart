@@ -26,9 +26,9 @@ class UpcomingWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15),
-        // Alterado para usar ListView.builder dentro de um SizedBox com altura fixa
+       
         SizedBox(
-          height: 200, // Define a altura do ListView horizontal
+          height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,

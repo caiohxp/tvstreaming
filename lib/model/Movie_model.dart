@@ -1,3 +1,5 @@
+import 'package:projeto_modulo_4/widgets/MovieGenres_model.dart';
+
 class MovieModel {
   final bool? adult;
   final String? backdropPath;
