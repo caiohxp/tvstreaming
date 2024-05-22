@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/widgets/Movie_model.dart';
+import 'package:projeto_modulo_4/model/Movie_model.dart';
 
 class UpcomingWidget extends StatelessWidget {
   final List<MovieModel> movies;
@@ -26,11 +26,17 @@ class UpcomingWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15),
-        SingleChildScrollView(
+        // Alterado para usar ListView.builder dentro de um SizedBox com altura fixa
+        SizedBox(
+          height: 200, // Define a altura do ListView horizontal
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: movies.map((movie) => MovieItem(movie: movie)).toList(),
-            ))
+            itemCount: movies.length,
+            itemBuilder: (context, index) {
+              return MovieItem(movie: movies[index]);
+            },
+          ),
+        ),
       ],
     );
   }
@@ -53,17 +59,19 @@ class MovieItem extends StatelessWidget {
         );
       },
       child: Container(
-          child: Padding(
-        padding: EdgeInsets.only(left: 10),
-        child: ClipRRect(
+        child: Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.network(
               movie.backdropPath!,
               height: 180,
               width: 300,
               fit: BoxFit.cover,
-            )),
-      )),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

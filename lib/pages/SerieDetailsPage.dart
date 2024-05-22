@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../widgets/Serie_model.dart';
+import '../model/Serie_model.dart';
 
 class SerieDetailsPage extends StatelessWidget {
   final SerieModel? serie;

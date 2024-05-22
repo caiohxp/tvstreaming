@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../widgets/Movie_model.dart';
+import '../model/Movie_model.dart';
 
 class MovieDetailsPage extends StatelessWidget {
   final MovieModel? movie;
@@ -19,7 +19,7 @@ class MovieDetailsPage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: 400, // Altura da imagem do filme
+                  height: 400, 
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage('${movie?.backdropPath ?? ''}]'),
