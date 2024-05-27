@@ -1,0 +1,145 @@
+[33mcommit 39dc4c2ce8800f641136e84d8dd79ffe45e2e74b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mintegracao-API-externa[m[33m, [m[1;31morigin/integracao-API-externa[m[33m)[m
+Merge: f4a870a 56f3b30
+Author: lipe221 <oida9022@gmail.com>
+Date:   Wed May 22 04:39:26 2024 -0300
+
+    Refatoração para integração da API e adição do FutureBuilder
+
+[33mcommit f4a870a20f093e9d74e609a2c1596f1585ec9b19[m
+Author: lipe221 <oida9022@gmail.com>
+Date:   Wed May 22 04:25:21 2024 -0300
+
+    Refatoração para integração da API e adição do FutureBuilder
+
+[33mcommit a554a9646cd2f0162d75134e40027bfe56d06289[m
+Author: lipe221 <oida9022@gmail.com>
+Date:   Wed May 22 04:16:00 2024 -0300
+
+    feat: Refatoração para integração da API e adição do FutureBuilder
+
+[33mcommit 56f3b306ebf556495ab6d328d4fb7598b238bb28[m[33m ([m[1;32mmain[m[33m)[m
+Author: caiohxp <caiocesar.ccomp@gmail.com>
+Date:   Mon May 20 20:35:16 2024 -0300
+
+    feat: adicionando chamada para a api de generos e também os models de moviegenre e seriegenre
+
+[33mcommit bb374dcd8a2663af132526682d4ea139bb35ddb3[m
+Merge: b3d3c9f 27aeeb2
+Author: Luiz Felipe <115747668+Lipee221@users.noreply.github.com>
+Date:   Mon May 20 08:08:51 2024 -0300
+
+    Merge pull request #5 from Lipee221/buscar-dados-api
+    
+    feat: buscando filmes e series da api
+
+[33mcommit 27aeeb2f8a1fc93ddd4c861d732258d3d71eca28[m[33m ([m[1;31morigin/buscar-dados-api[m[33m)[m
+Author: caiohxp <caiocesar.ccomp@gmail.com>
+Date:   Mon May 20 05:40:21 2024 -0300
+
+    feat: buscando filmes e series da api
+
+[33mcommit b3d3c9f9a097a0035055271447d6601dd05f08be[m
+Author: lipe221 <oida9022@gmail.com>
+Date:   Mon May 13 22:24:11 2024 -0300
+
+    Atualizando as imagens
+
+[33mcommit d69cdd61f64a06b494798adc73d37009e21d57e6[m
+Merge: 29c62de f2defff
+Author: Luiz Felipe <115747668+Lipee221@users.noreply.github.com>
+Date:   Mon May 13 18:56:47 2024 -0300
+
+    Merge pull request #4 from Lipee221/navigator-details
+    
+    feat: navegação para a página detalhes ao clicar
+
+[33mcommit f2defff6690d8065562bb91c91694de513381db3[m[33m ([m[1;31morigin/navigator-details[m[33m)[m
+Author: caiohxp <caiocesar.ccomp@gmail.com>
+Date:   Mon May 13 18:53:27 2024 -0300
+
+    feat: navegação para a página detalhes ao clicar
+
+[33mcommit 29c62debd1a5e37bf054eaa3dbdc1ab79f94ce69[m
+Merge: d5a9252 f411d78
+Author: Igor Fortti <igormfortti@gmail.com>
+Date:   Mon May 13 16:01:39 2024 -0300
+
+    Merge pull request #3 from Lipee221/movie-details
+    
+    feat: adicionada pagina de detalhes
+
+[33mcommit f411d78ecb09c8ab48efb039407574ab477bf8db[m[33m ([m[1;31morigin/movie-details[m[33m)[m
+Author: caiohxp <caiocesar.ccomp@gmail.com>
+Date:   Mon May 13 14:49:39 2024 -0300
+
+    feat: adicionada pagina de detalhes
+
+[33mcommit d5a9252997bfaa91662d447a3913a5af4557d1d7[m
+Merge: 569d941 683dfdf
+Author: Bruno José <46513538+brunozn@users.noreply.github.com>
+Date:   Mon May 13 12:26:56 2024 -0300
+
+    Merge pull request #2 from Lipee221/005
+    
+    005
+
+[33mcommit 683dfdf1b73363f21c7dc3486aed2417e79c60ca[m[33m ([m[1;31morigin/005[m[33m)[m
+Author: lipe221 <oida9022@gmail.com>
+Date:   Mon May 13 11:57:19 2024 -0300
+
+    feat: Criei um carroseu séries - Transforrmei os intes para entidades.  fix: Removi o bottom navigation bar - Troquei o Image.asset.
+
+[33mcommit 5e1257c6973551ff4a009f084b7932cd2b10380f[m
+Merge: d265aa3 569d941
+Author: lipe221 <oida9022@gmail.com>
+Date:   Thu May 9 17:54:00 2024 -0300
+
+    teste
+
+[33mcommit d265aa3fbfa9559f00ae76c72a750098f25d6c01[m
+Author: lipe221 <oida9022@gmail.com>
+Date:   Thu May 9 17:44:11 2024 -0300
+
+    teste
+
+[33mcommit 569d9411c9abb8bd25c4e3c06a7c3ede5e09eed6[m
+Author: Igor Fortti <igor.fortti@positivo.com.br>
+Date:   Mon May 6 20:48:19 2024 -0300
+
+    bugfix: Removido key word const
+
+[33mcommit adac3c69df344e884f2b2c41e244d6276f1201ce[m
+Author: lipe221 <oida9022@gmail.com>
+Date:   Sun May 5 17:30:23 2024 -0300
+
+    Publicação da HomePage
+
+[33mcommit 3b6cf15dddc3b17c95465ea7701d1ce677dbe825[m
+Author: Igor Fortti <igor.fortti@positivo.com.br>
+Date:   Wed May 1 01:17:33 2024 -0300
+
+    add branchs and commits info
+
+[33mcommit fbc7dae9f2d429bb339435268dba167b7cc50cee[m
+Author: Igor Fortti <igor.fortti@positivo.com.br>
+Date:   Wed May 1 01:12:55 2024 -0300
+
+    update README.md
+
+[33mcommit a54b79ae5e84447092de3a7ff3e6141f29fc765c[m
+Author: Igor Fortti <igor.fortti@positivo.com.br>
+Date:   Wed May 1 01:01:57 2024 -0300
+
+    initial commit
+
+[33mcommit de70b6747ba11942229208c9a2273f9bd927b550[m
+Author: Igor Fortti <igor.fortti@positivo.com.br>
+Date:   Wed May 1 01:11:40 2024 -0300
+
+    update README.md
+
+[33mcommit 2ddc7a13947755aa033677765773e678e7917210[m
+Author: Igor Fortti <igormfortti@gmail.com>
+Date:   Wed May 1 00:56:50 2024 -0300
+
+    Initial commit

@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:projeto_modulo_4/widgets/MovieGenres_model.dart';
+import 'package:projeto_modulo_4/model/MovieGenres_model.dart';
 import '../model/Movie_model.dart';
+import 'package:http/http.dart' as http;
+
 
 class MovieDetailsPage extends StatefulWidget {
   final MovieModel? movie;

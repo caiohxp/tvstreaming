@@ -1,5 +1,3 @@
-import 'package:projeto_modulo_4/widgets/MovieGenres_model.dart';
-
 class MovieModel {
   final bool? adult;
   final String? backdropPath;
@@ -15,7 +13,7 @@ class MovieModel {
   final bool? video;
   final double? voteAverage;
   final int? voteCount;
-
+  
   MovieModel({
     this.adult,
     String? backdropPath,
@@ -32,10 +30,10 @@ class MovieModel {
     this.voteAverage,
     this.voteCount,
   })  : backdropPath = backdropPath != null
-            ? 'https://image.tmdb.org/t/p/original/$backdropPath'
+            ? 'https://image.tmdb.org/t/p/w500/$backdropPath'
             : null,
         posterPath = posterPath != null
-            ? 'https://image.tmdb.org/t/p/original/$posterPath'
+            ? 'https://image.tmdb.org/t/p/w500/$posterPath'
             : null;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -55,6 +53,10 @@ class MovieModel {
       voteAverage: json['vote_average'].toDouble(),
       voteCount: json['vote_count'],
     );
+  }
+
+  bool containsSearchTerm(String term) {
+    return title!.toLowerCase().contains(term.toLowerCase());
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_modulo_4/main.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 
@@ -114,9 +115,20 @@ class MovieItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 3),
+                 
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber),
+                      Icon(Icons.star, color: Colors.amber),                     
+                      SizedBox(width: 5),
+                      Text(
+                        movie.voteAverage.toString(),
+                        style: TextStyle(
+                          color: Colors.white54,
+                          fontSize: 16,
+                        ),
+                      ),
+                      
+                     Icon(Icons.favorite, color: const Color.fromARGB(255, 255, 7, 7)),                     
                       SizedBox(width: 5),
                       Text(
                         movie.voteAverage.toString(),
@@ -125,7 +137,10 @@ class MovieItem extends StatelessWidget {
                           fontSize: 16,
                         ),
                       )
-                    ],
+                    
+                      
+                    ]
+                  
                   ),
                 ],
               ),

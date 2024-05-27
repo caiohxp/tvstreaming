@@ -1,3 +1,4 @@
+
 class SerieModel {
   final bool? adult;
   final String? backdropPath;
@@ -29,8 +30,8 @@ class SerieModel {
     this.name,
     this.voteAverage,
     this.voteCount,
-  })  : backdropPath = 'https://image.tmdb.org/t/p/original/$backdropPath',
-        posterPath = 'https://image.tmdb.org/t/p/original/$posterPath';
+  })  : backdropPath = 'https://image.tmdb.org/t/p/w500/$backdropPath',
+        posterPath = 'https://image.tmdb.org/t/p/w500/$posterPath';
 
   factory SerieModel.fromJson(Map<String, dynamic> json) {
     return SerieModel(
@@ -49,6 +50,10 @@ class SerieModel {
       voteAverage: json['vote_average'].toDouble(),
       voteCount: json['vote_count'],
     );
+  }
+
+  bool containsSearchTerm(String term) {
+    return name!.toLowerCase().contains(term.toLowerCase());
   }
 
   @override
