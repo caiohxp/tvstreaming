@@ -16,7 +16,7 @@ class NewMoviesWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
               Text(
@@ -32,7 +32,7 @@ class NewMoviesWidget extends StatelessWidget {
         ),
         SizedBox(height: 15),
         SizedBox(
-          height: 340,
+          height: 400,
           child: BlocProvider<MovieBloc>(
             create: (_) => MovieBloc(),
             child: ListView.builder(
@@ -71,19 +71,11 @@ class MovieItem extends HookWidget {
           );
         },
         child: Container(
-          width: 190,
-          height: 340,
-          margin: EdgeInsets.only(left: 10),
+          width: 250,
+          margin: EdgeInsets.only(left: 20),
           decoration: BoxDecoration(
-            color: Color(0xFF292B37),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0xFF292B37).withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 6,
-              ),
-            ],
-          ),
+              color: Color(0xFF292B37),
+              borderRadius: BorderRadius.circular(10)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -97,9 +89,9 @@ class MovieItem extends HookWidget {
                     ),
                     child: Image.network(
                       movie.posterPath!,
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.cover,
+                      height: 300,
+                      width: 250,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   AnimatedOpacity(

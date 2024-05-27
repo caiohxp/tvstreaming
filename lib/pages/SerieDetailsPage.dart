@@ -63,7 +63,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
                     image: DecorationImage(
                       image:
                           NetworkImage('${widget.serie?.backdropPath ?? ''}'),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
