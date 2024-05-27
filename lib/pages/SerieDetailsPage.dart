@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:projeto_modulo_4/model/SerieGenres_model.dart';
-import '../model/Serie_model.dart';
+import 'package:projeto_modulo_4/model/MovieGenres_model.dart';
+import '../model/Serie_model.dart'; 
+import 'package:http/http.dart' as http;
 
 class SerieDetailsPage extends StatefulWidget {
-  final SerieModel? serie;
-
+  final SerieModel? serie; 
   const SerieDetailsPage({Key? key, this.serie}) : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class SerieDetailsPage extends StatefulWidget {
 }
 
 class _SerieDetailsPageState extends State<SerieDetailsPage> {
-  List<SerieGenreModel> genres = [];
+  List<MovieGenreModel> genres = [];
   final String apiKey =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTY2ZjkyOWI1ZTJjMGNjMjhiMTdjMGI3NDFkMDQ1OSIsInN1YiI6IjY2NGFiZmQ0NjU4YmViMmIwNjk2MjI2MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KTfaE78Lmqqh-iqVRaYOpvYufyIRvin7LhlHVRlht8s';
 
@@ -27,7 +27,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
 
   Future<void> fetchGenres() async {
     final response = await http.get(
-      Uri.parse('https://api.themoviedb.org/3/genre/tv/list'),
+      Uri.parse('https://api.themoviedb.org/3/genre/movie/list'),
       headers: {
         'Authorization': 'Bearer $apiKey',
       },
@@ -39,7 +39,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
 
       setState(() {
         genres = results
-            .map((genreJson) => SerieGenreModel.fromJson(genreJson))
+            .map((genreJson) => MovieGenreModel.fromJson(genreJson))
             .toList();
       });
     } else {
@@ -58,7 +58,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
             Stack(
               children: [
                 Container(
-                  height: 400, // Altura da imagem do filme
+                  height: 400, 
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image:
@@ -131,7 +131,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
               child: Text(
-                '${widget.serie?.name ?? ''}',
+                '${widget.serie?.name ?? ''}', 
                 style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
@@ -175,7 +175,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
 
   String _getGenreNameById(int id) {
     final genre = genres.firstWhere((genre) => genre.id == id,
-        orElse: () => SerieGenreModel(id: 0, name: 'Unknown'));
+        orElse: () => MovieGenreModel(id: 0, name: 'Unknown'));
     return genre.name;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_modulo_4/main.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 
