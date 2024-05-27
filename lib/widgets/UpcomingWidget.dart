@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/main.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 
-class UpcomingWidget extends StatelessWidget {
+class UpcomingWidget extends HookWidget {
   final List<MovieModel> movies;
 
   UpcomingWidget({required this.movies});
 
   @override
   Widget build(BuildContext context) {
+    final _scrollController = useScrollController();
     return Column(
       children: [
         Padding(
@@ -30,12 +33,20 @@ class UpcomingWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: movies.length,
-            itemBuilder: (context, index) {
-              return MovieItem(movie: movies[index]);
-            },
+          child: BlocProvider<MovieBloc>(
+            create: (_) => MovieBloc(),
+            child: Scrollbar(
+              controller: _scrollController,
+              thumbVisibility: true,
+              child: ListView.builder(
+                controller: _scrollController,
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  return MovieItem(movie: movies[index]);
+                },
+              ),
+            ),
           ),
         ),
       ],

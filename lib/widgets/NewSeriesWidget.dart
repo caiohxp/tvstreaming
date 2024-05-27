@@ -6,13 +6,15 @@ import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
 import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 
-class NewSeriesWidget extends StatelessWidget {
+class NewSeriesWidget extends HookWidget {
   final List<SerieModel> series;
 
   NewSeriesWidget({required this.series});
 
   @override
   Widget build(BuildContext context) {
+    final _scrollController = useScrollController();
+
     return Column(
       children: [
         Padding(
@@ -33,12 +35,17 @@ class NewSeriesWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 400,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: series.length,
-            itemBuilder: (context, index) {
-              return SerieItem(serie: series[index]);
-            },
+          child: Scrollbar(
+            controller: _scrollController,
+            thumbVisibility: true,
+            child: ListView.builder(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              itemCount: series.length,
+              itemBuilder: (context, index) {
+                return SerieItem(serie: series[index]);
+              },
+            ),
           ),
         ),
       ],
@@ -117,6 +124,8 @@ class SerieItem extends HookWidget {
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 3),
                     Text(

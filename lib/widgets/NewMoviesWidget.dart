@@ -6,13 +6,14 @@ import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 
-class NewMoviesWidget extends StatelessWidget {
+class NewMoviesWidget extends HookWidget {
   final List<MovieModel> movies;
 
   NewMoviesWidget({required this.movies});
 
   @override
   Widget build(BuildContext context) {
+    final _scrollController = useScrollController();
     return Column(
       children: [
         Padding(
@@ -35,12 +36,17 @@ class NewMoviesWidget extends StatelessWidget {
           height: 400,
           child: BlocProvider<MovieBloc>(
             create: (_) => MovieBloc(),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                return MovieItem(movie: movies[index]);
-              },
+            child: Scrollbar(
+              controller: _scrollController,
+              thumbVisibility: true,
+              child: ListView.builder(
+                controller: _scrollController,
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  return MovieItem(movie: movies[index]);
+                },
+              ),
             ),
           ),
         ),
@@ -120,6 +126,8 @@ class MovieItem extends HookWidget {
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 3),
                     Text(
