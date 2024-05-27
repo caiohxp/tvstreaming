@@ -125,13 +125,13 @@ class MovieItem extends HookWidget {
                       movie.title!,
                       style: TextStyle(
                         color: Color(0xFF00A470),
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(height: 3),
                     Text(
-                      movie.releaseDate!,
+                      DateTime.parse(movie.releaseDate!).year.toString(),
                       style: TextStyle(
                         color: Colors.white54,
                       ),
@@ -142,10 +142,10 @@ class MovieItem extends HookWidget {
                         Icon(Icons.star, color: Colors.amber),
                         SizedBox(width: 5),
                         Text(
-                          movie.voteAverage?.toString() ?? 'N/A',
+                          movie.voteAverage!.toStringAsFixed(1),
                           style: TextStyle(
                             color: Colors.white54,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                         SizedBox(width: 5),

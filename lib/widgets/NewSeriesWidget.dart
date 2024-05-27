@@ -122,13 +122,13 @@ class SerieItem extends HookWidget {
                       serie?.name ?? '',
                       style: TextStyle(
                         color: Color(0xFF00A470),
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(height: 3),
                     Text(
-                      serie?.firstAirDate ?? '',
+                      DateTime.parse(serie!.firstAirDate!).year.toString(),
                       style: TextStyle(
                         color: Colors.white54,
                       ),
@@ -139,10 +139,10 @@ class SerieItem extends HookWidget {
                         Icon(Icons.star, color: Colors.amber),
                         SizedBox(width: 5),
                         Text(
-                          serie?.voteAverage?.toString() ?? '',
+                          serie!.voteAverage!.toStringAsFixed(1),
                           style: TextStyle(
                             color: Colors.white54,
-                            fontSize: 16,
+                            fontSize: 14,
                           ),
                         ),
                         SizedBox(width: 5),
