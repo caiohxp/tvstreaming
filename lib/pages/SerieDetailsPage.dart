@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:projeto_modulo_4/model/MovieGenres_model.dart';
-import '../model/SerieModelDefinition.dart'; 
+import '../model/SerieModelDefinition.dart';
 import 'package:http/http.dart' as http;
 
 class SerieDetailsPage extends StatefulWidget {
-  final SerieModel? serie; 
+  final SerieModel? serie;
   const SerieDetailsPage({Key? key, this.serie}) : super(key: key);
 
   @override
@@ -58,12 +58,12 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
             Stack(
               children: [
                 Container(
-                  height: 400, 
+                  height: 400,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image:
                           NetworkImage('${widget.serie?.backdropPath ?? ''}'),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -131,9 +131,9 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
               child: Text(
-                '${widget.serie?.name ?? ''}', 
+                '${widget.serie?.name ?? ''}',
                 style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 0, 164, 112)),
               ),
@@ -141,7 +141,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
               child: Text(
-                '${widget.serie?.firstAirDate ?? ''} - ${widget.serie?.voteAverage ?? ''}',
+                '${DateTime.parse(widget.serie?.firstAirDate ?? '').year} - ${widget.serie?.voteAverage!.toStringAsFixed(1) ?? ''}',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,

@@ -6,7 +6,6 @@ import 'package:projeto_modulo_4/model/MovieGenres_model.dart';
 import '../model/Movie_model.dart';
 import 'package:http/http.dart' as http;
 
-
 class MovieDetailsPage extends StatefulWidget {
   final MovieModel? movie;
 
@@ -60,7 +59,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
             Stack(
               children: [
                 Container(
-                  height: 400, 
+                  height: 400,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image:
@@ -135,7 +134,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               child: Text(
                 '${widget.movie?.title ?? ''}',
                 style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 0, 164, 112)),
               ),
@@ -143,7 +142,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
               child: Text(
-                '${widget.movie?.releaseDate ?? ''} - ${widget.movie?.voteAverage ?? ''}',
+                '${DateTime.parse(widget.movie!.releaseDate!).year} - ${widget.movie?.voteAverage!.toStringAsFixed(1) ?? ''}',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
