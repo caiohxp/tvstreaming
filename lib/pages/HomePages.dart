@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
-import 'package:projeto_modulo_4/model/Serie_model.dart';
+import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
+
+
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
 import 'package:projeto_modulo_4/widgets/UpcomingWidget.dart';
@@ -36,7 +38,10 @@ class HomeBody extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cinesquad'),
+        title: Text('Cinesquad', 
+        style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color((0xFF0F111D))
       ),
       body: FutureBuilder(
         future: Future.wait([
@@ -49,14 +54,18 @@ class HomeBody extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(child: Text('Erro ao carregar Filmes e Séries'));
           } else {
+           
             return BlocBuilder<MovieBloc, MovieState>(
               builder: (context, movieState) {
                 if (movieState is MoviesLoadedState) {
                   final List<MovieModel> movies = movieState.movies;
+                  
                   return BlocBuilder<SerieBloc, SerieState>(
                     builder: (context, serieState) {
                       if (serieState is SeriesLoadedState) {
+                  
                         final List<SerieModel> series = serieState.series;
+                       
                         return ListView(
                           padding: EdgeInsets.all(10),
                           children: [
