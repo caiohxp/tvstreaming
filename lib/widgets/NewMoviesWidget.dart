@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_modulo_4/main.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_modulo_4/bloc/movie_bloc.dart';
+import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 
@@ -30,17 +32,17 @@ class NewMoviesWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 340,
-          child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: movies.length,
-          itemBuilder: (context, index) {
-            return MovieItem(movie: movies[index]);
-          },
-          )  
-          
-          
+          child: BlocProvider<MovieBloc>(
+            create: (_) => MovieBloc(), 
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: movies.length,
+              itemBuilder: (context, index) {
+                return MovieItem(movie: movies[index]);
+              },
+            ),
           ),
-        
+        ),
       ],
     );
   }
@@ -115,38 +117,59 @@ class MovieItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 3),
-                 
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber),                     
+                      Icon(Icons.star, color: Colors.amber),
                       SizedBox(width: 5),
                       Text(
-                        movie.voteAverage.toString(),
+                        movie.voteAverage?.toString() ?? 'N/A',
                         style: TextStyle(
                           color: Colors.white54,
                           fontSize: 16,
                         ),
                       ),
-                      
-                     Icon(Icons.favorite, color: const Color.fromARGB(255, 255, 7, 7)),                     
-                      SizedBox(width: 5),
-                      Text(
-                        movie.voteAverage.toString(),
-                        style: TextStyle(
-                          color: Colors.white54,
-                          fontSize: 16,
-                        ),
-                      )
+                    SizedBox(width: 5),
+                   
+                    BlocProvider.value(
+                    value: context.read<MovieBloc>(),
+                    child: FavoriteIcon(movie: movie),
                     
-                      
-                    ]
-                  
+                    )
+                     
+                    ],
                   ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FavoriteIcon extends StatelessWidget {
+  final MovieModel movie;
+
+  const FavoriteIcon({Key? key, required this.movie, SerieModel? serie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.read<MovieBloc>().add(ToggleFavoriteEvent(movie));
+      },
+      child: BlocBuilder<MovieBloc, MovieState>(
+        builder: (context, state) {
+          bool isFavorite = false;
+          if (state is MoviesLoadedState) {
+            isFavorite = state.favoriteMovieIds.contains(movie.id);
+          }
+          return Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: const Color.fromARGB(255, 255, 7, 7),
+          );
+        },
       ),
     );
   }
