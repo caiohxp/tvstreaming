@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class MovieEvent {}
 
@@ -13,7 +13,6 @@ class ToggleFavoriteEvent extends MovieEvent {
 
   ToggleFavoriteEvent(this.movie);
 }
-
 
 abstract class MovieState {}
 
@@ -30,7 +29,6 @@ class MovieErrorState extends MovieState {
   MovieErrorState(this.errorMessage);
 }
 
-
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
   final String apiKey =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTY2ZjkyOWI1ZTJjMGNjMjhiMTdjMGI3NDFkMDQ1OSIsInN1YiI6IjY2NGFiZmQ0NjU4YmViMmIwNjk2MjI2MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KTfaE78Lmqqh-iqVRaYOpvYufyIRvin7LhlHVRlht8s';
@@ -38,6 +36,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   MovieBloc() : super(MoviesLoadedState([], {})) {
     on<FetchMoviesEvent>(_mapFetchMoviesEventToState);
     on<ToggleFavoriteEvent>(_mapToggleFavoriteEventToState);
+    _loadFavoriteIds();
   }
 
   Future<void> fetchMovies() async {
@@ -70,10 +69,10 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     await fetchMovies();
   }
 
-  void _mapToggleFavoriteEventToState(
+  Future<void> _mapToggleFavoriteEventToState(
     ToggleFavoriteEvent event,
     Emitter<MovieState> emit,
-  ) {
+  ) async {
     if (state is MoviesLoadedState) {
       final currentState = state as MoviesLoadedState;
       final Set<int> updatedFavorites = Set.from(currentState.favoriteMovieIds);
@@ -83,8 +82,22 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
         } else {
           updatedFavorites.add(event.movie.id!);
         }
+        await _saveFavoriteIds(updatedFavorites);
         emit(MoviesLoadedState(currentState.movies, updatedFavorites));
       }
     }
+  }
+
+  Future<void> _loadFavoriteIds() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoriteIds = prefs.getStringList('favoriteMovieIds')?.map((id) => int.parse(id)).toSet() ?? {};
+    if (state is MoviesLoadedState) {
+      emit(MoviesLoadedState((state as MoviesLoadedState).movies, favoriteIds));
+    }
+  }
+
+  Future<void> _saveFavoriteIds(Set<int> favoriteIds) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('favoriteMovieIds', favoriteIds.map((id) => id.toString()).toList());
   }
 }

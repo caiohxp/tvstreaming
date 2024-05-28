@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SerieEvent {}
 
@@ -36,6 +36,7 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
   SerieBloc() : super(SeriesLoadedState([], {})) {
     on<FetchSeriesEvent>(_mapFetchSeriesEventToState);
     on<ToggleFavoriteEvent>(_mapToggleFavoriteEventToState);
+    _loadFavoriteIds();  
   }
 
   Future<void> fetchSeries() async {
@@ -68,10 +69,10 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
     await fetchSeries();
   }
 
-  void _mapToggleFavoriteEventToState(
+  Future<void> _mapToggleFavoriteEventToState(
     ToggleFavoriteEvent event,
     Emitter<SerieState> emit,
-  ) {
+  ) async {
     if (state is SeriesLoadedState) {
       final currentState = state as SeriesLoadedState;
       final Set<int> updatedFavorites = Set.from(currentState.favoriteSeriesIds);
@@ -82,7 +83,21 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
           updatedFavorites.add(event.serie.id!);
         }
         emit(SeriesLoadedState(currentState.series, updatedFavorites));
+        await _saveFavoriteIds(updatedFavorites);  
       }
     }
+  }
+
+  Future<void> _loadFavoriteIds() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoriteIds = prefs.getStringList('favoriteSeriesIds')?.map((id) => int.parse(id)).toSet() ?? {};
+    if (state is SeriesLoadedState) {
+      emit(SeriesLoadedState((state as SeriesLoadedState).series, favoriteIds));
+    }
+  }
+
+  Future<void> _saveFavoriteIds(Set<int> favoriteIds) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('favoriteSeriesIds', favoriteIds.map((id) => id.toString()).toList());
   }
 }

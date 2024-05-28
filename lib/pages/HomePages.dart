@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
-
 
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';

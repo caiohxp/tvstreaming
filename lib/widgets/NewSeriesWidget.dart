@@ -32,6 +32,9 @@ class NewSeriesWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 340,
+          
+          child: BlocProvider<SerieBloc>(
+            create: (_) => SerieBloc(), 
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: series.length,
@@ -40,7 +43,9 @@ class NewSeriesWidget extends StatelessWidget {
             },
           ),
         ),
+        )
       ],
+
     );
   }
 }
@@ -114,6 +119,7 @@ class SerieItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 3),
+                  
                   Row(
                     children: [
                       Icon(Icons.star, color: Colors.amber),
@@ -126,6 +132,7 @@ class SerieItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 5),
+                      
                       BlocProvider.value(
                         value: context.read<SerieBloc>(),
                         child: FavoriteIcon(serie: serie!),

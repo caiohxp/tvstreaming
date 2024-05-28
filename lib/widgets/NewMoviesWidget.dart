@@ -32,6 +32,7 @@ class NewMoviesWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 340,
+          
           child: BlocProvider<MovieBloc>(
             create: (_) => MovieBloc(), 
             child: ListView.builder(
@@ -117,6 +118,7 @@ class MovieItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 3),
+                  
                   Row(
                     children: [
                       Icon(Icons.star, color: Colors.amber),
