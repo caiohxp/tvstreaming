@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
 import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 
-class NewSeriesWidget extends StatelessWidget {
+class NewSeriesWidget extends HookWidget {
   final List<SerieModel> series;
 
   NewSeriesWidget({required this.series});
 
   @override
   Widget build(BuildContext context) {
+    final _scrollController = useScrollController();
+
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
               Text(
@@ -32,25 +35,23 @@ class NewSeriesWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 340,
-          
           child: BlocProvider<SerieBloc>(
-            create: (_) => SerieBloc(), 
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: series.length,
-            itemBuilder: (context, index) {
-              return SerieItem(serie: series[index]);
-            },
+            create: (_) => SerieBloc(),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: series.length,
+              itemBuilder: (context, index) {
+                return SerieItem(serie: series[index]);
+              },
+            ),
           ),
-        ),
         )
       ],
-
     );
   }
 }
 
-class SerieItem extends StatelessWidget {
+class SerieItem extends HookWidget {
   final SerieModel? serie;
 
   const SerieItem({Key? key, this.serie}) : super(key: key);
@@ -119,7 +120,6 @@ class SerieItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 3),
-                  
                   Row(
                     children: [
                       Icon(Icons.star, color: Colors.amber),
@@ -132,7 +132,6 @@ class SerieItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 5),
-                      
                       BlocProvider.value(
                         value: context.read<SerieBloc>(),
                         child: FavoriteIcon(serie: serie!),

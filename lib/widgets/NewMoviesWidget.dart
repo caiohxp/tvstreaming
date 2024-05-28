@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/movie_bloc.dart';
 import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/model/Movie_model.dart';
 
-class NewMoviesWidget extends StatelessWidget {
+class NewMoviesWidget extends HookWidget {
   final List<MovieModel> movies;
 
   NewMoviesWidget({required this.movies});
 
   @override
   Widget build(BuildContext context) {
+    final _scrollController = useScrollController();
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
               Text(
@@ -32,15 +34,19 @@ class NewMoviesWidget extends StatelessWidget {
         SizedBox(height: 15),
         SizedBox(
           height: 340,
-          
           child: BlocProvider<MovieBloc>(
-            create: (_) => MovieBloc(), 
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                return MovieItem(movie: movies[index]);
-              },
+            create: (_) => MovieBloc(),
+            child: Scrollbar(
+              controller: _scrollController,
+              thumbVisibility: true,
+              child: ListView.builder(
+                controller: _scrollController,
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  return MovieItem(movie: movies[index]);
+                },
+              ),
             ),
           ),
         ),
@@ -49,7 +55,7 @@ class NewMoviesWidget extends StatelessWidget {
   }
 }
 
-class MovieItem extends StatelessWidget {
+class MovieItem extends HookWidget {
   final MovieModel movie;
 
   const MovieItem({Key? key, required this.movie}) : super(key: key);
@@ -118,7 +124,6 @@ class MovieItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 3),
-                  
                   Row(
                     children: [
                       Icon(Icons.star, color: Colors.amber),
@@ -130,14 +135,11 @@ class MovieItem extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                    SizedBox(width: 5),
-                   
-                    BlocProvider.value(
-                    value: context.read<MovieBloc>(),
-                    child: FavoriteIcon(movie: movie),
-                    
-                    )
-                     
+                      SizedBox(width: 5),
+                      BlocProvider.value(
+                        value: context.read<MovieBloc>(),
+                        child: FavoriteIcon(movie: movie),
+                      )
                     ],
                   ),
                 ],
@@ -153,7 +155,8 @@ class MovieItem extends StatelessWidget {
 class FavoriteIcon extends StatelessWidget {
   final MovieModel movie;
 
-  const FavoriteIcon({Key? key, required this.movie, SerieModel? serie}) : super(key: key);
+  const FavoriteIcon({Key? key, required this.movie, SerieModel? serie})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
