@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -53,17 +54,36 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
       color: Color(0xFF0F111D),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
               children: [
                 Container(
                   height: 400,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        '${widget.serie?.backdropPath ?? ''}',
+                        fit: BoxFit.fill,
+                      ),
+                      BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 400,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image:
-                          NetworkImage('${widget.serie?.backdropPath ?? ''}'),
-                      fit: BoxFit.fill,
+                      image: NetworkImage('${widget.serie?.posterPath ?? ''}'),
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -88,7 +108,7 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
                 ),
                 Positioned(
                   bottom: 0,
-                  right: 0,
+                  right: 20,
                   child: Container(
                     child: Row(
                       children: [
@@ -140,12 +160,25 @@ class _SerieDetailsPageState extends State<SerieDetailsPage> {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-              child: Text(
-                '${DateTime.parse(widget.serie?.firstAirDate ?? '').year} - ${widget.serie?.voteAverage!.toStringAsFixed(1) ?? ''}',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${DateTime.parse(widget.serie!.firstAirDate!).year} - ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Icon(Icons.star, color: Colors.amber),
+                  Text(
+                    '${widget.serie?.voteAverage!.toStringAsFixed(1) ?? ''}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
