@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/main.dart';
+import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/model/Movie_model.dart';
 
 class UpcomingWidget extends HookWidget {
-  final List<MovieModel> movies;
+  final List<MultiModel> movies;
 
   UpcomingWidget({required this.movies});
 
@@ -17,7 +17,7 @@ class UpcomingWidget extends HookWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
               Text(
@@ -35,7 +35,7 @@ class UpcomingWidget extends HookWidget {
           height: 200,
           child: BlocProvider<MovieBloc>(
             create: (_) => MovieBloc(),
-            child: Scrollbar(
+            child: RawScrollbar(
               controller: _scrollController,
               thumbVisibility: true,
               child: ListView.builder(
@@ -46,6 +46,9 @@ class UpcomingWidget extends HookWidget {
                   return MovieItem(movie: movies[index]);
                 },
               ),
+              thumbColor: Color(0xFF00A470),
+              radius: Radius.circular(8.0),
+              thickness: 8.0,
             ),
           ),
         ),
@@ -55,7 +58,7 @@ class UpcomingWidget extends HookWidget {
 }
 
 class MovieItem extends HookWidget {
-  final MovieModel movie;
+  final MultiModel movie;
 
   const MovieItem({Key? key, required this.movie}) : super(key: key);
 
