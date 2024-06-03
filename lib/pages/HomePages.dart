@@ -102,172 +102,187 @@ class _HomeBodyState extends State<HomeBody> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 150,
+        toolbarHeight: 100,
+        titleSpacing: 138,
         title: Text(
           'Cinesquad',
-          style: TextStyle(color: Colors.white, fontSize: 72),
+          style: TextStyle(color: Colors.white, fontSize: 25),
         ),
         backgroundColor: Color(0xFF0F111D),
       ),
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: 60,
-                width: 500,
-                margin: EdgeInsets.only(bottom: 20),
-                padding: EdgeInsets.only(left: 25),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 39, 43, 66),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.white54,
-                      size: 30,
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 60,
+                    width: 100,
+                    padding: EdgeInsets.only(left: 25),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 39, 43, 66),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        height: 40,
-                        child: TextFormField(
-                          controller: _controller,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Buscar",
-                            hintStyle: TextStyle(color: Colors.white54),
-                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                          ),
-                          onChanged: (query) {
-                            setState(() {
-                              searchQuery = query;
-                            });
-                            if (query.isNotEmpty) {
-                              multiBloc.add(FetchMultiEvent(query));
-                            }
-                          },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: Colors.white54,
+                          size: 30,
                         ),
-                      ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Container(
+                            height: 40,
+                            child: TextFormField(
+                              controller: _controller,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Buscar",
+                                hintStyle: TextStyle(color: Colors.white54),
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: 5),
+                              ),
+                              onChanged: (query) {
+                                setState(() {
+                                  searchQuery = query;
+                                });
+                                if (query.isNotEmpty) {
+                                  multiBloc.add(FetchMultiEvent(query));
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        if (searchQuery.isNotEmpty)
+                          IconButton(
+                            icon: Icon(Icons.clear, color: Colors.white54),
+                            onPressed: () {
+                              setState(() {
+                                searchQuery = "";
+                                _controller.clear();
+                              });
+                              multiBloc.add(ClearSearchEvent());
+                            },
+                          ),
+                      ],
                     ),
-                    if (searchQuery.isNotEmpty)
+                  ),
+                ),
+                SizedBox(width: 34),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      showFavoriteMovies = !showFavoriteMovies;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(139, 0, 0, 0),
+                      padding: EdgeInsets.all(20)),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Lista de Favoritos',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.favorite,
+                        color: const Color.fromARGB(255, 255, 7, 7),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 50),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    DropdownButton<int>(
+                      value: selectedMovieGenreId,
+                      hint: Text("Filmes por gênero",
+                          style: TextStyle(color: Colors.white)),
+                      dropdownColor: Color(0xFF292B37),
+                      items: movieGenres.map((genre) {
+                        return DropdownMenuItem<int>(
+                          value: genre['id'],
+                          child: Text(
+                            genre['name'],
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedMovieGenreId = value;
+                        });
+                        if (value != null) {
+                          discoverMovieBloc
+                              .add(FetchDiscoverMoviesEvent([value]));
+                        }
+                      },
+                    ),
+                    if (selectedMovieGenreId != null)
                       IconButton(
-                        icon: Icon(Icons.clear, color: Colors.white54),
                         onPressed: () {
                           setState(() {
-                            searchQuery = "";
-                            _controller.clear();
+                            selectedMovieGenreId = null;
                           });
-                          multiBloc.add(ClearSearchEvent());
+                          discoverMovieBloc.add(FetchDiscoverMoviesEvent([]));
                         },
+                        icon: Icon(Icons.clear, color: Colors.white54),
                       ),
                   ],
                 ),
-              ),
-              Row(
-                children: [
-                  DropdownButton<int>(
-                    value: selectedMovieGenreId,
-                    hint: Text("Filmes por gênero",
-                        style: TextStyle(color: Colors.white)),
-                    dropdownColor: Color(0xFF292B37),
-                    items: movieGenres.map((genre) {
-                      return DropdownMenuItem<int>(
-                        value: genre['id'],
-                        child: Text(
-                          genre['name'],
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedMovieGenreId = value;
-                      });
-                      if (value != null) {
-                        discoverMovieBloc
-                            .add(FetchDiscoverMoviesEvent([value]));
-                      }
-                    },
-                  ),
-                  if (selectedMovieGenreId != null)
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedMovieGenreId = null;
-                        });
-                        discoverMovieBloc.add(FetchDiscoverMoviesEvent([]));
-                      },
-                      icon: Icon(Icons.clear, color: Colors.white54),
-                    ),
-                ],
-              ),
-              Row(
-                children: [
-                  DropdownButton<int>(
-                    value: selectedTVGenreId,
-                    hint: Text("Séries por gênero",
-                        style: TextStyle(color: Colors.white)),
-                    dropdownColor: Color(0xFF292B37),
-                    items: tvGenres.map((genre) {
-                      return DropdownMenuItem<int>(
-                        value: genre['id'],
-                        child: Text(
-                          genre['name'],
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedTVGenreId = value;
-                      });
-                      if (value != null) {
-                        discoverSerieBloc
-                            .add(FetchDiscoverSeriesEvent([value]));
-                      }
-                    },
-                  ),
-                  if (selectedTVGenreId != null)
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedTVGenreId = null;
-                        });
-                        discoverSerieBloc.add(FetchDiscoverSeriesEvent([]));
-                      },
-                      icon: Icon(Icons.clear, color: Colors.white54),
-                    ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    showFavoriteMovies = !showFavoriteMovies;
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(139, 0, 0, 0),
-                    padding: EdgeInsets.all(20)),
-                child: Row(
+                Row(
                   children: [
-                    Text(
-                      'Lista de Favoritos',
-                      style: TextStyle(color: Colors.white),
+                    DropdownButton<int>(
+                      value: selectedTVGenreId,
+                      hint: Text("Séries por gênero",
+                          style: TextStyle(color: Colors.white)),
+                      dropdownColor: Color(0xFF292B37),
+                      items: tvGenres.map((genre) {
+                        return DropdownMenuItem<int>(
+                          value: genre['id'],
+                          child: Text(
+                            genre['name'],
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedTVGenreId = value;
+                        });
+                        if (value != null) {
+                          discoverSerieBloc
+                              .add(FetchDiscoverSeriesEvent([value]));
+                        }
+                      },
                     ),
-                    Icon(
-                      Icons.favorite,
-                      color: const Color.fromARGB(255, 255, 7, 7),
-                    )
+                    if (selectedTVGenreId != null)
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            selectedTVGenreId = null;
+                          });
+                          discoverSerieBloc.add(FetchDiscoverSeriesEvent([]));
+                        },
+                        icon: Icon(Icons.clear, color: Colors.white54),
+                      ),
                   ],
                 ),
-              )
-            ],
+              ],
+            ),
           ),
           Expanded(
             child: showFavoriteMovies

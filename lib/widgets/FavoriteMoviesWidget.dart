@@ -66,23 +66,24 @@ class FavoriteMoviesWidget extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Row(
           children: [
-            Image.network(
-              posterPath,
-              width: 125,
-              height: 150,
-              fit: BoxFit.contain,
-            ),
             SizedBox(width: 10),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Image.network(
+                    posterPath,
+                    width: 125,
+                    height: 150,
+                    fit: BoxFit.contain,
+                  ),
                   Text(
                     title,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   SizedBox(height: 5),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.star, color: Colors.amber, size: 20),
                       Text(
