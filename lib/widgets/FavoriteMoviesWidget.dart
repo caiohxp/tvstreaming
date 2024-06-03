@@ -66,7 +66,6 @@ class FavoriteMoviesWidget extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Row(
           children: [
-            SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

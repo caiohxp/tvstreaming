@@ -191,7 +191,9 @@ class _HomeBodyState extends State<HomeBody> {
                         style: TextStyle(color: Colors.white),
                       ),
                       Icon(
-                        Icons.favorite,
+                        showFavoriteMovies
+                            ? Icons.favorite
+                            : Icons.favorite_outline,
                         color: const Color.fromARGB(255, 255, 7, 7),
                       )
                     ],
