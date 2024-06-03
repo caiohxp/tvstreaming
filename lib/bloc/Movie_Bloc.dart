@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/model/Movie_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +9,7 @@ abstract class MovieEvent {}
 class FetchMoviesEvent extends MovieEvent {}
 
 class ToggleFavoriteEvent extends MovieEvent {
-  final MovieModel movie;
+  final MultiModel movie;
 
   ToggleFavoriteEvent(this.movie);
 }
@@ -17,7 +17,7 @@ class ToggleFavoriteEvent extends MovieEvent {
 abstract class MovieState {}
 
 class MoviesLoadedState extends MovieState {
-  final List<MovieModel> movies;
+  final List<MultiModel> movies;
   final Set<int> favoriteMovieIds;
 
   MoviesLoadedState(this.movies, this.favoriteMovieIds);
@@ -50,10 +50,19 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
       if (response.statusCode == 200) {
         final moviesData = json.decode(response.body);
-        final List<MovieModel> movies = (moviesData['results'] as List)
-            .map((movieJson) => MovieModel.fromJson(movieJson))
+        final List<MultiModel> movies = (moviesData['results'] as List)
+            .map((movieJson) => MultiModel.fromJson(movieJson))
             .toList();
-        emit(MoviesLoadedState(movies, state is MoviesLoadedState ? (state as MoviesLoadedState).favoriteMovieIds : {}));
+        // if (movies.isNotEmpty) {
+        //   print('Primeiro item retornado: ${movies[0]}');
+        // } else {
+        //   print('Nenhum item retornado');
+        //}
+        emit(MoviesLoadedState(
+            movies,
+            state is MoviesLoadedState
+                ? (state as MoviesLoadedState).favoriteMovieIds
+                : {}));
       } else {
         throw Exception('Erro ao carregar Filmes');
       }
@@ -90,7 +99,11 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   Future<void> _loadFavoriteIds() async {
     final prefs = await SharedPreferences.getInstance();
-    final favoriteIds = prefs.getStringList('favoriteMovieIds')?.map((id) => int.parse(id)).toSet() ?? {};
+    final favoriteIds = prefs
+            .getStringList('favoriteMovieIds')
+            ?.map((id) => int.parse(id))
+            .toSet() ??
+        {};
     if (state is MoviesLoadedState) {
       emit(MoviesLoadedState((state as MoviesLoadedState).movies, favoriteIds));
     }
@@ -98,6 +111,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   Future<void> _saveFavoriteIds(Set<int> favoriteIds) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('favoriteMovieIds', favoriteIds.map((id) => id.toString()).toList());
+    await prefs.setStringList(
+        'favoriteMovieIds', favoriteIds.map((id) => id.toString()).toList());
   }
 }

@@ -1,66 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/bloc/movie_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
+import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
+import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
 
-class NewMoviesWidget extends HookWidget {
-  final List<MultiModel> movies;
+class SerieItem extends HookWidget {
+  final MultiModel? serie;
 
-  NewMoviesWidget({required this.movies});
-
-  @override
-  Widget build(BuildContext context) {
-    final _scrollController = useScrollController();
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: [
-              Text(
-                "Filmes recentes",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 15),
-        SizedBox(
-          height: 370,
-          child: BlocProvider<MovieBloc>(
-            create: (_) => MovieBloc(),
-            child: RawScrollbar(
-              controller: _scrollController,
-              thumbVisibility: true,
-              child: ListView.builder(
-                controller: _scrollController,
-                scrollDirection: Axis.horizontal,
-                itemCount: movies.length,
-                itemBuilder: (context, index) {
-                  return MovieItem(movie: movies[index]);
-                },
-              ),
-              thumbColor: Color(0xFF00A470),
-              radius: Radius.circular(8.0),
-              thickness: 8.0,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class MovieItem extends HookWidget {
-  final MultiModel movie;
-
-  const MovieItem({Key? key, required this.movie}) : super(key: key);
+  const SerieItem({Key? key, this.serie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +23,7 @@ class MovieItem extends HookWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MovieDetailsPage(movie: movie),
+              builder: (context) => SerieDetailsPage(serie: serie!),
             ),
           );
         },
@@ -96,7 +45,7 @@ class MovieItem extends HookWidget {
                       topRight: Radius.circular(10),
                     ),
                     child: Image.network(
-                      movie.posterPath!,
+                      serie!.posterPath!,
                       height: 300,
                       width: 250,
                       fit: BoxFit.fill,
@@ -117,9 +66,9 @@ class MovieItem extends HookWidget {
                           child: Row(
                             children: [
                               Icon(Icons.star, color: Colors.amber),
-                              SizedBox(width: 4),
+                              SizedBox(width: 5),
                               Text(
-                                movie.voteAverage!.toStringAsFixed(1),
+                                serie!.voteAverage!.toStringAsFixed(1),
                                 style: TextStyle(
                                   color: Colors.white54,
                                   fontSize: 14,
@@ -134,10 +83,10 @@ class MovieItem extends HookWidget {
                               color: Color.fromARGB(101, 255, 255, 255),
                               borderRadius: BorderRadius.circular(20)),
                           child: BlocProvider.value(
-                            value: context.read<MovieBloc>(),
-                            child: FavoriteIcon(movie: movie),
+                            value: context.read<SerieBloc>(),
+                            child: FavoriteIcon(serie: serie!),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -149,7 +98,7 @@ class MovieItem extends HookWidget {
                       size: 80,
                       color: Colors.white.withOpacity(0.8),
                     ),
-                  ),
+                  )
                 ],
               ),
               Padding(
@@ -161,7 +110,7 @@ class MovieItem extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title!,
+                      serie?.name ?? '',
                       style: TextStyle(
                         color: Color(0xFF00A470),
                         fontSize: 15,
@@ -172,7 +121,7 @@ class MovieItem extends HookWidget {
                     ),
                     SizedBox(height: 3),
                     Text(
-                      DateTime.parse(movie.releaseDate!).year.toString(),
+                      DateTime.parse(serie!.firstAirDate!).year.toString(),
                       style: TextStyle(
                         color: Colors.white54,
                       ),
@@ -184,34 +133,6 @@ class MovieItem extends HookWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class FavoriteIcon extends StatelessWidget {
-  final MultiModel movie;
-
-  const FavoriteIcon({Key? key, required this.movie, MultiModel? serie})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.read<MovieBloc>().add(ToggleFavoriteEvent(movie));
-      },
-      child: BlocBuilder<MovieBloc, MovieState>(
-        builder: (context, state) {
-          bool isFavorite = false;
-          if (state is MoviesLoadedState) {
-            isFavorite = state.favoriteMovieIds.contains(movie.id);
-          }
-          return Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: const Color.fromARGB(255, 255, 7, 7),
-          );
-        },
       ),
     );
   }

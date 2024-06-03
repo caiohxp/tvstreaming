@@ -1,14 +1,14 @@
-class MovieGenreModel {
+class GenreModel {
   final int id;
   final String name;
 
-  MovieGenreModel({
+  GenreModel({
     required this.id,
     required this.name,
   });
 
-  factory MovieGenreModel.fromJson(Map<String, dynamic> json) {
-    return MovieGenreModel(
+  factory GenreModel.fromJson(Map<String, dynamic> json) {
+    return GenreModel(
       id: json['id'],
       name: json['name'],
     );
