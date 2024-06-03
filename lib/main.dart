@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_modulo_4/bloc/DIscoverMovie_Bloc.dart';
+import 'package:projeto_modulo_4/bloc/DiscoverSerie_Bloc.dart';
 import 'package:projeto_modulo_4/bloc/Genre_Bloc.dart';
 import 'package:projeto_modulo_4/pages/CategoryPage.dart';
 import 'package:projeto_modulo_4/pages/HomePages.dart';
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<SerieBloc>(create: (_) => SerieBloc()),
         BlocProvider<MovieGenreBloc>(create: (_) => MovieGenreBloc()),
         BlocProvider<SerieGenreBloc>(create: (_) => SerieGenreBloc()),
+        BlocProvider<DiscoverMovieBloc>(create: (_) => DiscoverMovieBloc()),
+        BlocProvider<DiscoverSerieBloc>(create: (_) => DiscoverSerieBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
