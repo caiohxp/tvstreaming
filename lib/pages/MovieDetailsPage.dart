@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/Genre_Bloc.dart';
+import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Genres_model.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
+import 'package:projeto_modulo_4/widgets/FavoriteMovie.dart';
 
 class MovieDetailsPage extends StatelessWidget {
   final MultiModel? movie;
@@ -71,59 +73,29 @@ class MovieDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 20,
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () => {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 0, 164, 112),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 20),
-                              ),
-                              child: Text(
-                                "Assistir",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () => {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 0, 164, 112),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 20),
-                              ),
-                              child: Text(
-                                "Trailer",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
-                child: Text(
-                  '${movie?.title ?? ''}',
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 164, 112)),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: Text(
+                      '${movie?.title ?? ''}',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 164, 112)),
+                    ),
+                  ),
+                  BlocProvider.value(
+                    value: context.read<MovieBloc>(),
+                    child: FavoriteMovie(
+                      movie: movie!,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 50, vertical: 0),

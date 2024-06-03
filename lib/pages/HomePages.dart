@@ -8,6 +8,7 @@ import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/widgets/DiscoverMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/DiscoverSeriesWidget.dart';
+import 'package:projeto_modulo_4/widgets/FavoriteMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/MultiSearchWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
@@ -90,6 +91,8 @@ class _HomeBodyState extends State<HomeBody> {
   int? selectedTVGenreId;
   int? selectedMovieGenreId;
   final TextEditingController _controller = TextEditingController();
+  bool showFavoriteMovies = false;
+  bool showFavoriteSeries = false;
 
   @override
   Widget build(BuildContext context) {
@@ -242,85 +245,144 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                 ],
               ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    showFavoriteMovies = !showFavoriteMovies;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(139, 0, 0, 0),
+                    padding: EdgeInsets.all(20)),
+                child: Row(
+                  children: [
+                    Text(
+                      'Lista de Favoritos',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Icon(
+                      Icons.favorite,
+                      color: const Color.fromARGB(255, 255, 7, 7),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
           Expanded(
-            child: BlocBuilder<MultiBloc, MultiState>(
-              builder: (context, state) {
-                if (searchQuery.isNotEmpty) {
-                  if (state is MultiLoadedState) {
-                    final List<MultiModel> items = state.items;
-                    return MultiSearchWidget(items: items);
-                  } else if (state is MultiErrorState) {
-                    return Center(child: Text(state.errorMessage));
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                } else if (selectedMovieGenreId != null) {
-                  return BlocBuilder<DiscoverMovieBloc, DiscoverMovieState>(
-                    builder: (context, state) {
-                      if (state is DiscoverMovieLoadedState) {
-                        final List<MultiModel> movies = state.movies;
-                        return DiscoverMoviesWidget(movies: movies);
-                      } else if (state is DiscoverMovieErrorState) {
-                        return Center(child: Text(state.errorMessage));
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  );
-                } else if (selectedTVGenreId != null) {
-                  return BlocBuilder<DiscoverSerieBloc, DiscoverSerieState>(
-                    builder: (context, state) {
-                      if (state is DiscoverSerieLoadedState) {
-                        final List<MultiModel> series = state.series;
-                        return DiscoverSeriesWidget(series: series);
-                      } else if (state is DiscoverSerieErrorState) {
-                        return Center(child: Text(state.errorMessage));
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  );
-                } else {
-                  return BlocBuilder<MovieBloc, MovieState>(
+            child: showFavoriteMovies
+                ? BlocBuilder<MovieBloc, MovieState>(
                     builder: (context, movieState) {
-                      if (movieState is MoviesLoadedState) {
-                        final List<MultiModel> movies = movieState.movies;
-                        return BlocBuilder<SerieBloc, SerieState>(
-                          builder: (context, serieState) {
-                            if (serieState is SeriesLoadedState) {
-                              final List<MultiModel> series = serieState.series;
-                              return ListView(
-                                padding: EdgeInsets.all(10),
-                                children: [
-                                  SizedBox(height: 20),
-                                  UpcomingWidget(movies: movies),
-                                  SizedBox(height: 20),
-                                  NewMoviesWidget(movies: movies),
-                                  SizedBox(height: 20),
-                                  NewSeriesWidget(series: series),
-                                  SizedBox(height: 20),
-                                ],
-                              );
-                            } else if (serieState is SerieErrorState) {
-                              return Center(
-                                  child: Text(serieState.errorMessage));
+                      return BlocBuilder<SerieBloc, SerieState>(
+                        builder: (context, serieState) {
+                          if (movieState is MoviesLoadedState &&
+                              serieState is SeriesLoadedState) {
+                            final List<MultiModel> favoriteMovies = movieState
+                                .movies
+                                .where((movie) => movieState.favoriteMovieIds
+                                    .contains(movie.id))
+                                .toList();
+                            final List<MultiModel> favoriteSeries = serieState
+                                .series
+                                .where((serie) => serieState.favoriteSeriesIds
+                                    .contains(serie.id))
+                                .toList();
+                            return FavoriteMoviesWidget(
+                              favoriteMovies: favoriteMovies,
+                              favoriteSeries: favoriteSeries,
+                            );
+                          } else if (movieState is MovieErrorState) {
+                            return Center(child: Text(movieState.errorMessage));
+                          } else if (serieState is SerieErrorState) {
+                            return Center(child: Text(serieState.errorMessage));
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        },
+                      );
+                    },
+                  )
+                : BlocBuilder<MultiBloc, MultiState>(
+                    builder: (context, state) {
+                      if (searchQuery.isNotEmpty) {
+                        if (state is MultiLoadedState) {
+                          final List<MultiModel> items = state.items;
+                          return MultiSearchWidget(items: items);
+                        } else if (state is MultiErrorState) {
+                          return Center(child: Text(state.errorMessage));
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      } else if (selectedMovieGenreId != null) {
+                        return BlocBuilder<DiscoverMovieBloc,
+                            DiscoverMovieState>(
+                          builder: (context, state) {
+                            if (state is DiscoverMovieLoadedState) {
+                              final List<MultiModel> movies = state.movies;
+                              return DiscoverMoviesWidget(movies: movies);
+                            } else if (state is DiscoverMovieErrorState) {
+                              return Center(child: Text(state.errorMessage));
                             } else {
                               return Center(child: CircularProgressIndicator());
                             }
                           },
                         );
-                      } else if (movieState is MovieErrorState) {
-                        return Center(child: Text(movieState.errorMessage));
+                      } else if (selectedTVGenreId != null) {
+                        return BlocBuilder<DiscoverSerieBloc,
+                            DiscoverSerieState>(
+                          builder: (context, state) {
+                            if (state is DiscoverSerieLoadedState) {
+                              final List<MultiModel> series = state.series;
+                              return DiscoverSeriesWidget(series: series);
+                            } else if (state is DiscoverSerieErrorState) {
+                              return Center(child: Text(state.errorMessage));
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          },
+                        );
                       } else {
-                        return Center(child: CircularProgressIndicator());
+                        return BlocBuilder<MovieBloc, MovieState>(
+                          builder: (context, movieState) {
+                            if (movieState is MoviesLoadedState) {
+                              final List<MultiModel> movies = movieState.movies;
+                              return BlocBuilder<SerieBloc, SerieState>(
+                                builder: (context, serieState) {
+                                  if (serieState is SeriesLoadedState) {
+                                    final List<MultiModel> series =
+                                        serieState.series;
+                                    return ListView(
+                                      padding: EdgeInsets.all(10),
+                                      children: [
+                                        SizedBox(height: 20),
+                                        UpcomingWidget(movies: movies),
+                                        SizedBox(height: 20),
+                                        NewMoviesWidget(movies: movies),
+                                        SizedBox(height: 20),
+                                        NewSeriesWidget(series: series),
+                                        SizedBox(height: 20),
+                                      ],
+                                    );
+                                  } else if (serieState is SerieErrorState) {
+                                    return Center(
+                                        child: Text(serieState.errorMessage));
+                                  } else {
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                  }
+                                },
+                              );
+                            } else if (movieState is MovieErrorState) {
+                              return Center(
+                                  child: Text(movieState.errorMessage));
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          },
+                        );
                       }
                     },
-                  );
-                }
-              },
-            ),
+                  ),
           ),
         ],
       ),

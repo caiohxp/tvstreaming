@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
+import 'package:projeto_modulo_4/widgets/FavoriteSerie.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
 
 class SerieItem extends HookWidget {
@@ -84,7 +85,7 @@ class SerieItem extends HookWidget {
                               borderRadius: BorderRadius.circular(20)),
                           child: BlocProvider.value(
                             value: context.read<SerieBloc>(),
-                            child: FavoriteIcon(serie: serie!),
+                            child: FavoriteSerie(serie: serie!),
                           ),
                         ),
                       ],

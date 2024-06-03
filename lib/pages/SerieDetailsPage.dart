@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
+import 'package:projeto_modulo_4/widgets/FavoriteSerie.dart';
 import '../bloc/Genre_Bloc.dart';
 import '../model/Genres_model.dart';
 
@@ -86,25 +88,19 @@ class SerieDetailsPage extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 30, vertical: 20),
                               ),
-                              child: Text(
-                                "Assistir",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () => {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 0, 164, 112),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 20),
-                              ),
-                              child: Text(
-                                "Trailer",
-                                style: TextStyle(color: Colors.white),
+                              child: Row(
+                                children: [
+                                  BlocProvider.value(
+                                    value: context.read<SerieBloc>(),
+                                    child: FavoriteSerie(
+                                      serie: serie!,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Adicionar Favorito",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
                               ),
                             ),
                           )

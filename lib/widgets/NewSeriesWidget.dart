@@ -56,30 +56,3 @@ class NewSeriesWidget extends HookWidget {
     );
   }
 }
-
-class FavoriteIcon extends StatelessWidget {
-  final MultiModel serie;
-
-  const FavoriteIcon({Key? key, required this.serie}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.read<SerieBloc>().add(ToggleFavoriteEvent(serie));
-      },
-      child: BlocBuilder<SerieBloc, SerieState>(
-        builder: (context, state) {
-          bool isFavorite = false;
-          if (state is SeriesLoadedState) {
-            isFavorite = state.favoriteSeriesIds.contains(serie.id);
-          }
-          return Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: const Color.fromARGB(255, 255, 7, 7),
-          );
-        },
-      ),
-    );
-  }
-}

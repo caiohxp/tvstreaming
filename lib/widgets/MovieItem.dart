@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
+import 'package:projeto_modulo_4/widgets/FavoriteMovie.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 
 class MovieItem extends HookWidget {
@@ -85,7 +86,7 @@ class MovieItem extends HookWidget {
                               borderRadius: BorderRadius.circular(20)),
                           child: BlocProvider.value(
                             value: context.read<MovieBloc>(),
-                            child: FavoriteIcon(movie: movie),
+                            child: FavoriteMovie(movie: movie),
                           ),
                         )
                       ],
