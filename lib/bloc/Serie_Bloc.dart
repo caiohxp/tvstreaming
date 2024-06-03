@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/model/SerieModelDefinition.dart';
+import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,7 +9,7 @@ abstract class SerieEvent {}
 class FetchSeriesEvent extends SerieEvent {}
 
 class ToggleFavoriteEvent extends SerieEvent {
-  final SerieModel serie;
+  final MultiModel serie;
 
   ToggleFavoriteEvent(this.serie);
 }
@@ -17,7 +17,7 @@ class ToggleFavoriteEvent extends SerieEvent {
 abstract class SerieState {}
 
 class SeriesLoadedState extends SerieState {
-  final List<SerieModel> series;
+  final List<MultiModel> series;
   final Set<int> favoriteSeriesIds;
 
   SeriesLoadedState(this.series, this.favoriteSeriesIds);
@@ -36,7 +36,7 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
   SerieBloc() : super(SeriesLoadedState([], {})) {
     on<FetchSeriesEvent>(_mapFetchSeriesEventToState);
     on<ToggleFavoriteEvent>(_mapToggleFavoriteEventToState);
-    _loadFavoriteIds();  
+    _loadFavoriteIds();
   }
 
   Future<void> fetchSeries() async {
@@ -50,10 +50,14 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
 
       if (response.statusCode == 200) {
         final seriesData = json.decode(response.body);
-        final List<SerieModel> series = (seriesData['results'] as List)
-            .map((serieJson) => SerieModel.fromJson(serieJson))
+        final List<MultiModel> series = (seriesData['results'] as List)
+            .map((serieJson) => MultiModel.fromJson(serieJson))
             .toList();
-        emit(SeriesLoadedState(series, state is SeriesLoadedState ? (state as SeriesLoadedState).favoriteSeriesIds : {}));
+        emit(SeriesLoadedState(
+            series,
+            state is SeriesLoadedState
+                ? (state as SeriesLoadedState).favoriteSeriesIds
+                : {}));
       } else {
         throw Exception('Erro ao carregar Séries');
       }
@@ -75,7 +79,8 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
   ) async {
     if (state is SeriesLoadedState) {
       final currentState = state as SeriesLoadedState;
-      final Set<int> updatedFavorites = Set.from(currentState.favoriteSeriesIds);
+      final Set<int> updatedFavorites =
+          Set.from(currentState.favoriteSeriesIds);
       if (event.serie.id != null) {
         if (updatedFavorites.contains(event.serie.id)) {
           updatedFavorites.remove(event.serie.id);
@@ -83,14 +88,18 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
           updatedFavorites.add(event.serie.id!);
         }
         emit(SeriesLoadedState(currentState.series, updatedFavorites));
-        await _saveFavoriteIds(updatedFavorites);  
+        await _saveFavoriteIds(updatedFavorites);
       }
     }
   }
 
   Future<void> _loadFavoriteIds() async {
     final prefs = await SharedPreferences.getInstance();
-    final favoriteIds = prefs.getStringList('favoriteSeriesIds')?.map((id) => int.parse(id)).toSet() ?? {};
+    final favoriteIds = prefs
+            .getStringList('favoriteSeriesIds')
+            ?.map((id) => int.parse(id))
+            .toSet() ??
+        {};
     if (state is SeriesLoadedState) {
       emit(SeriesLoadedState((state as SeriesLoadedState).series, favoriteIds));
     }
@@ -98,6 +107,7 @@ class SerieBloc extends Bloc<SerieEvent, SerieState> {
 
   Future<void> _saveFavoriteIds(Set<int> favoriteIds) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('favoriteSeriesIds', favoriteIds.map((id) => id.toString()).toList());
+    await prefs.setStringList(
+        'favoriteSeriesIds', favoriteIds.map((id) => id.toString()).toList());
   }
 }
