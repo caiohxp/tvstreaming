@@ -72,53 +72,29 @@ class SerieDetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 20,
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () => {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 0, 164, 112),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 20),
-                              ),
-                              child: Row(
-                                children: [
-                                  BlocProvider.value(
-                                    value: context.read<SerieBloc>(),
-                                    child: FavoriteSerie(
-                                      serie: serie!,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Adicionar Favorito",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 8),
-                child: Text(
-                  '${serie?.name ?? ''}',
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 164, 112)),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: Text(
+                      '${serie?.name ?? ''}',
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 164, 112)),
+                    ),
+                  ),
+                  BlocProvider.value(
+                    value: context.read<SerieBloc>(),
+                    child: FavoriteSerie(
+                      serie: serie!,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 50, vertical: 0),

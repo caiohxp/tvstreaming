@@ -4,6 +4,7 @@ import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/bloc/movie_bloc.dart';
 import 'package:projeto_modulo_4/bloc/serie_bloc.dart';
+import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
 
 class FavoriteMoviesWidget extends StatelessWidget {
   final List<MultiModel> favoriteMovies;
@@ -58,7 +59,11 @@ class FavoriteMoviesWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MovieDetailsPage(movie: item),
+            builder: (context) => item.mediaType == "movie"
+                ? MovieDetailsPage(movie: item)
+                : SerieDetailsPage(
+                    serie: item,
+                  ),
           ),
         );
       },
