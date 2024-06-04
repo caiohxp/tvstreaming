@@ -18,25 +18,44 @@ class FavoriteMoviesWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: ListView.builder(
-            padding: EdgeInsets.all(10),
-            itemCount: favoriteMovies.length,
-            itemBuilder: (context, index) {
-              final item = favoriteMovies[index];
-              return _buildFavoriteItem(context, item);
-            },
+          child: Column(
+            children: [
+              Text(
+                'Favorite Movies',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.all(10),
+                  itemCount: favoriteMovies.length,
+                  itemBuilder: (context, index) {
+                    final item = favoriteMovies[index];
+                    return _buildFavoriteItem(context, item);
+                  },
+                ),
+              )
+            ],
           ),
         ),
         Expanded(
-          child: ListView.builder(
-            padding: EdgeInsets.all(10),
-            itemCount: favoriteSeries.length,
-            itemBuilder: (context, index) {
-              final item = favoriteSeries[index];
-              return _buildFavoriteItem(context, item);
-            },
-          ),
-        ),
+            child: Column(
+          children: [
+            Text(
+              'Favorite Series',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.all(10),
+                itemCount: favoriteSeries.length,
+                itemBuilder: (context, index) {
+                  final item = favoriteSeries[index];
+                  return _buildFavoriteItem(context, item);
+                },
+              ),
+            )
+          ],
+        )),
       ],
     );
   }
