@@ -59,7 +59,7 @@ class FavoriteMoviesWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => item.mediaType == "movie"
+            builder: (context) => item.releaseDate != null
                 ? MovieDetailsPage(movie: item)
                 : SerieDetailsPage(
                     serie: item,
