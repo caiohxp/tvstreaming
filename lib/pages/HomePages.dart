@@ -91,8 +91,7 @@ class _HomeBodyState extends State<HomeBody> {
   int? selectedTVGenreId;
   int? selectedMovieGenreId;
   final TextEditingController _controller = TextEditingController();
-  bool showFavoriteMovies = false;
-  bool showFavoriteSeries = false;
+  bool showFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,192 +101,202 @@ class _HomeBodyState extends State<HomeBody> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
-        titleSpacing: 138,
+        toolbarHeight: 70,
         title: Text(
           'Cinesquad',
-          style: TextStyle(color: Colors.white, fontSize: 25),
+          style: TextStyle(
+              color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Color(0xFF0F111D),
+        elevation: 100,
+        actions: [
+          IconButton(
+            icon: Icon(showFavorite ? Icons.favorite : Icons.favorite_outline,
+                color: const Color.fromARGB(255, 255, 7, 7)),
+            onPressed: () {
+              setState(
+                () {
+                  showFavorite = !showFavorite;
+                },
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Column(
         children: [
           Container(
             margin: EdgeInsets.symmetric(vertical: 20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Container(
-                    height: 60,
-                    width: 100,
-                    padding: EdgeInsets.only(left: 25),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 39, 43, 66),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search,
-                          color: Colors.white54,
-                          size: 30,
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Container(
-                            height: 40,
-                            child: TextFormField(
-                              controller: _controller,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Buscar",
-                                hintStyle: TextStyle(color: Colors.white54),
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 5),
+                showFavorite
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showFavorite = !showFavorite;
+                          });
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ))
+                    : Expanded(
+                        child: Container(
+                          height: 40,
+                          padding: EdgeInsets.only(left: 25),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 39, 43, 66),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.search,
+                                color: Colors.white54,
+                                size: 30,
                               ),
-                              onChanged: (query) {
-                                setState(() {
-                                  searchQuery = query;
-                                });
-                                if (query.isNotEmpty) {
-                                  multiBloc.add(FetchMultiEvent(query));
-                                }
-                              },
-                            ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: Container(
+                                  height: 40,
+                                  child: TextFormField(
+                                    controller: _controller,
+                                    style: TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Buscar",
+                                      hintStyle:
+                                          TextStyle(color: Colors.white54),
+                                      contentPadding:
+                                          EdgeInsets.symmetric(vertical: 5),
+                                    ),
+                                    onChanged: (query) {
+                                      setState(() {
+                                        searchQuery = query;
+                                      });
+                                      if (query.isNotEmpty) {
+                                        multiBloc.add(FetchMultiEvent(query));
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                              if (searchQuery.isNotEmpty)
+                                IconButton(
+                                  icon:
+                                      Icon(Icons.clear, color: Colors.white54),
+                                  onPressed: () {
+                                    setState(() {
+                                      searchQuery = "";
+                                      _controller.clear();
+                                    });
+                                    multiBloc.add(ClearSearchEvent());
+                                  },
+                                ),
+                            ],
                           ),
                         ),
-                        if (searchQuery.isNotEmpty)
-                          IconButton(
-                            icon: Icon(Icons.clear, color: Colors.white54),
-                            onPressed: () {
+                      ),
+                SizedBox(width: 34),
+              ],
+            ),
+          ),
+          showFavorite
+              ? Container()
+              : Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          DropdownButton<int>(
+                            value: selectedMovieGenreId,
+                            hint: Text("Filmes por gênero",
+                                style: TextStyle(color: Colors.white)),
+                            dropdownColor: Color(0xFF292B37),
+                            items: movieGenres.map((genre) {
+                              return DropdownMenuItem<int>(
+                                value: genre['id'],
+                                child: Text(
+                                  genre['name'],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
                               setState(() {
-                                searchQuery = "";
-                                _controller.clear();
+                                selectedMovieGenreId = value;
                               });
-                              multiBloc.add(ClearSearchEvent());
+                              if (value != null) {
+                                discoverMovieBloc
+                                    .add(FetchDiscoverMoviesEvent([value]));
+                              }
                             },
                           ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(width: 34),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      showFavoriteMovies = !showFavoriteMovies;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(139, 0, 0, 0),
-                      padding: EdgeInsets.all(20)),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Lista de Favoritos',
-                        style: TextStyle(color: Colors.white),
+                          if (selectedMovieGenreId != null)
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedMovieGenreId = null;
+                                });
+                                discoverMovieBloc
+                                    .add(FetchDiscoverMoviesEvent([]));
+                              },
+                              icon: Icon(Icons.clear, color: Colors.white54),
+                            ),
+                        ],
                       ),
-                      Icon(
-                        showFavoriteMovies
-                            ? Icons.favorite
-                            : Icons.favorite_outline,
-                        color: const Color.fromARGB(255, 255, 7, 7),
-                      )
+                      Row(
+                        children: [
+                          DropdownButton<int>(
+                            value: selectedTVGenreId,
+                            hint: Text("Séries por gênero",
+                                style: TextStyle(color: Colors.white)),
+                            dropdownColor: Color(0xFF292B37),
+                            items: tvGenres.map((genre) {
+                              return DropdownMenuItem<int>(
+                                value: genre['id'],
+                                child: Text(
+                                  genre['name'],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedTVGenreId = value;
+                              });
+                              if (value != null) {
+                                discoverSerieBloc
+                                    .add(FetchDiscoverSeriesEvent([value]));
+                              }
+                            },
+                          ),
+                          if (selectedTVGenreId != null)
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedTVGenreId = null;
+                                });
+                                discoverSerieBloc
+                                    .add(FetchDiscoverSeriesEvent([]));
+                              },
+                              icon: Icon(Icons.clear, color: Colors.white54),
+                            ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  children: [
-                    DropdownButton<int>(
-                      value: selectedMovieGenreId,
-                      hint: Text("Filmes por gênero",
-                          style: TextStyle(color: Colors.white)),
-                      dropdownColor: Color(0xFF292B37),
-                      items: movieGenres.map((genre) {
-                        return DropdownMenuItem<int>(
-                          value: genre['id'],
-                          child: Text(
-                            genre['name'],
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedMovieGenreId = value;
-                        });
-                        if (value != null) {
-                          discoverMovieBloc
-                              .add(FetchDiscoverMoviesEvent([value]));
-                        }
-                      },
-                    ),
-                    if (selectedMovieGenreId != null)
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedMovieGenreId = null;
-                          });
-                          discoverMovieBloc.add(FetchDiscoverMoviesEvent([]));
-                        },
-                        icon: Icon(Icons.clear, color: Colors.white54),
-                      ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    DropdownButton<int>(
-                      value: selectedTVGenreId,
-                      hint: Text("Séries por gênero",
-                          style: TextStyle(color: Colors.white)),
-                      dropdownColor: Color(0xFF292B37),
-                      items: tvGenres.map((genre) {
-                        return DropdownMenuItem<int>(
-                          value: genre['id'],
-                          child: Text(
-                            genre['name'],
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedTVGenreId = value;
-                        });
-                        if (value != null) {
-                          discoverSerieBloc
-                              .add(FetchDiscoverSeriesEvent([value]));
-                        }
-                      },
-                    ),
-                    if (selectedTVGenreId != null)
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedTVGenreId = null;
-                          });
-                          discoverSerieBloc.add(FetchDiscoverSeriesEvent([]));
-                        },
-                        icon: Icon(Icons.clear, color: Colors.white54),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           Expanded(
-            child: showFavoriteMovies
+            child: showFavorite
                 ? BlocBuilder<MovieBloc, MovieState>(
                     builder: (context, movieState) {
                       return BlocBuilder<SerieBloc, SerieState>(
