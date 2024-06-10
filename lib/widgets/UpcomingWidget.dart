@@ -30,7 +30,6 @@ class UpcomingWidget extends HookWidget {
             ],
           ),
         ),
-        SizedBox(height: 15),
         SizedBox(
           height: 200,
           child: BlocProvider<MovieBloc>(

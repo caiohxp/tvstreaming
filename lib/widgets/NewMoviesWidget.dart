@@ -32,7 +32,7 @@ class NewMoviesWidget extends HookWidget {
             ],
           ),
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 10),
         SizedBox(
           height: 370,
           child: BlocProvider<MovieBloc>(

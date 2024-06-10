@@ -1,61 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/bloc/movie_bloc.dart';
-import 'package:projeto_modulo_4/bloc/serie_bloc.dart';
 import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
+import 'package:responsive_styles/breakpoints/breakpoints.dart';
+import 'package:responsive_styles/responsive/responsive.dart';
 
-class FavoriteMoviesWidget extends StatelessWidget {
+class FavoriteMoviesWidget extends StatefulWidget {
   final List<MultiModel> favoriteMovies;
   final List<MultiModel> favoriteSeries;
+  final Responsive responsive;
 
   FavoriteMoviesWidget(
-      {required this.favoriteMovies, required this.favoriteSeries});
+      {required this.favoriteMovies,
+      required this.favoriteSeries,
+      required this.responsive});
+
+  @override
+  FavoriteMoviesWidgetState createState() => FavoriteMoviesWidgetState();
+}
+
+class FavoriteMoviesWidgetState extends State<FavoriteMoviesWidget> {
+  bool showFavoriteMovies = true;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: Column(
-            children: [
-              Text(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  showFavoriteMovies = true;
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: showFavoriteMovies
+                      ? const Color.fromARGB(255, 0, 164, 112)
+                      : const Color.fromARGB(139, 0, 0, 0),
+                  padding: EdgeInsets.all(20)),
+              child: Text(
                 'Favorite Movies',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.white, fontSize: 15),
               ),
-              Expanded(
-                child: ListView.builder(
+            ),
+            SizedBox(
+                width: widget.responsive.value({
+              Breakpoints.xs: 15,
+              Breakpoints.sm: 25,
+              Breakpoints.md: 40,
+              Breakpoints.lg: 50,
+              Breakpoints.xl: 60,
+            })),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  showFavoriteMovies = false;
+                });
+              },
+              child: Text(
+                'Favorite Series',
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: showFavoriteMovies
+                      ? const Color.fromARGB(139, 0, 0, 0)
+                      : const Color.fromARGB(255, 0, 164, 112),
+                  padding: EdgeInsets.all(20)),
+            ),
+          ],
+        ),
+        Expanded(
+          child: showFavoriteMovies
+              ? ListView.builder(
                   padding: EdgeInsets.all(10),
-                  itemCount: favoriteMovies.length,
+                  itemCount: widget.favoriteMovies.length,
                   itemBuilder: (context, index) {
-                    final item = favoriteMovies[index];
+                    final item = widget.favoriteMovies[index];
+                    return _buildFavoriteItem(context, item);
+                  },
+                )
+              : ListView.builder(
+                  padding: EdgeInsets.all(10),
+                  itemCount: widget.favoriteSeries.length,
+                  itemBuilder: (context, index) {
+                    final item = widget.favoriteSeries[index];
                     return _buildFavoriteItem(context, item);
                   },
                 ),
-              )
-            ],
-          ),
         ),
-        Expanded(
-            child: Column(
-          children: [
-            Text(
-              'Favorite Series',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.all(10),
-                itemCount: favoriteSeries.length,
-                itemBuilder: (context, index) {
-                  final item = favoriteSeries[index];
-                  return _buildFavoriteItem(context, item);
-                },
-              ),
-            )
-          ],
-        )),
       ],
     );
   }
@@ -89,49 +123,64 @@ class FavoriteMoviesWidget extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.network(
-                    posterPath,
-                    width: 125,
-                    height: 150,
-                    fit: BoxFit.contain,
-                  ),
-                  Text(
+            Image.network(
+              posterPath,
+              width: 125,
+              height: 150,
+              fit: BoxFit.contain,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: widget.responsive.value({
+                    Breakpoints.xs: 150,
+                    Breakpoints.sm: 250,
+                    Breakpoints.md: 400,
+                    Breakpoints.lg: 500,
+                    Breakpoints.xl: 600,
+                  }),
+                  child: Text(
                     title,
                     style: TextStyle(color: Colors.white, fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: 20),
-                      Text(
-                        rating,
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    year,
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(height: 5),
-                  SizedBox(
-                    width: 500,
-                    child: Text(
-                      overview,
-                      style: TextStyle(color: Colors.white70, fontSize: 12),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 5),
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.amber, size: 20),
+                    Text(
+                      rating,
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
+                  ],
+                ),
+                SizedBox(height: 5),
+                Text(
+                  year,
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+                SizedBox(height: 5),
+                SizedBox(
+                  width: widget.responsive.value({
+                    Breakpoints.xs: 150,
+                    Breakpoints.sm: 250,
+                    Breakpoints.md: 400,
+                    Breakpoints.lg: 500,
+                    Breakpoints.xl: 600,
+                  }),
+                  child: Text(
+                    overview,
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
