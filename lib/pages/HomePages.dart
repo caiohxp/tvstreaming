@@ -14,6 +14,7 @@ import 'package:projeto_modulo_4/widgets/MultiSearchWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
 import 'package:projeto_modulo_4/widgets/UpcomingWidget.dart';
+import 'package:responsive_styles/breakpoints/breakpoints.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
 
 const List<Map<String, dynamic>> tvGenres = [
@@ -127,7 +128,13 @@ class _HomeBodyState extends State<HomeBody> {
           ),
           isSearching
               ? Container(
-                  width: 300,
+                  width: responsive.value({
+                    Breakpoints.xs: 100,
+                    Breakpoints.sm: 150,
+                    Breakpoints.md: 200,
+                    Breakpoints.lg: 300,
+                    Breakpoints.xl: 300,
+                  }),
                   decoration: BoxDecoration(
                       color: Color.fromARGB(255, 39, 43, 66),
                       borderRadius: BorderRadius.circular(20)),
@@ -235,7 +242,13 @@ class _HomeBodyState extends State<HomeBody> {
                               ],
                             ),
                             SizedBox(
-                              width: 100,
+                              width: responsive.value({
+                                Breakpoints.xs: 20,
+                                Breakpoints.sm: 50,
+                                Breakpoints.md: 100,
+                                Breakpoints.lg: 150,
+                                Breakpoints.xl: 200,
+                              }),
                             ),
                             Row(
                               children: [
