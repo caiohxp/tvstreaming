@@ -13,6 +13,7 @@ import 'package:projeto_modulo_4/widgets/MultiSearchWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
 import 'package:projeto_modulo_4/widgets/UpcomingWidget.dart';
+import 'package:responsive_styles/responsive/responsive.dart';
 
 const List<Map<String, dynamic>> tvGenres = [
   {'id': 10759, 'name': 'Action & Adventure'},
@@ -95,6 +96,7 @@ class _HomeBodyState extends State<HomeBody> {
 
   @override
   Widget build(BuildContext context) {
+    var responsive = Responsive(context);
     final multiBloc = context.read<MultiBloc>();
     final discoverSerieBloc = context.read<DiscoverSerieBloc>();
     final discoverMovieBloc = context.read<DiscoverMovieBloc>();
@@ -316,6 +318,7 @@ class _HomeBodyState extends State<HomeBody> {
                             return FavoriteMoviesWidget(
                               favoriteMovies: favoriteMovies,
                               favoriteSeries: favoriteSeries,
+                              responsive: responsive,
                             );
                           } else if (movieState is MovieErrorState) {
                             return Center(child: Text(movieState.errorMessage));

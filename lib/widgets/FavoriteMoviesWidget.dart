@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
+import 'package:responsive_styles/breakpoints/breakpoints.dart';
+import 'package:responsive_styles/responsive/responsive.dart';
 
 class FavoriteMoviesWidget extends StatefulWidget {
   final List<MultiModel> favoriteMovies;
   final List<MultiModel> favoriteSeries;
+  final Responsive responsive;
 
-  FavoriteMoviesWidget({
-    required this.favoriteMovies,
-    required this.favoriteSeries,
-  });
+  FavoriteMoviesWidget(
+      {required this.favoriteMovies,
+      required this.favoriteSeries,
+      required this.responsive});
 
   @override
   FavoriteMoviesWidgetState createState() => FavoriteMoviesWidgetState();
@@ -42,7 +45,14 @@ class FavoriteMoviesWidgetState extends State<FavoriteMoviesWidget> {
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
             ),
-            SizedBox(width: 10),
+            SizedBox(
+                width: widget.responsive.value({
+              Breakpoints.xs: 15,
+              Breakpoints.sm: 25,
+              Breakpoints.md: 40,
+              Breakpoints.lg: 50,
+              Breakpoints.xl: 60,
+            })),
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -124,9 +134,20 @@ class FavoriteMoviesWidgetState extends State<FavoriteMoviesWidget> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                SizedBox(
+                  width: widget.responsive.value({
+                    Breakpoints.xs: 150,
+                    Breakpoints.sm: 250,
+                    Breakpoints.md: 400,
+                    Breakpoints.lg: 500,
+                    Breakpoints.xl: 600,
+                  }),
+                  child: Text(
+                    title,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 SizedBox(height: 5),
                 Row(
@@ -145,7 +166,13 @@ class FavoriteMoviesWidgetState extends State<FavoriteMoviesWidget> {
                 ),
                 SizedBox(height: 5),
                 SizedBox(
-                  width: 100,
+                  width: widget.responsive.value({
+                    Breakpoints.xs: 150,
+                    Breakpoints.sm: 250,
+                    Breakpoints.md: 400,
+                    Breakpoints.lg: 500,
+                    Breakpoints.xl: 600,
+                  }),
                   child: Text(
                     overview,
                     style: TextStyle(color: Colors.white70, fontSize: 12),
