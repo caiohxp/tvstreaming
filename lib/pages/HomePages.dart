@@ -197,99 +197,128 @@ class _HomeBodyState extends State<HomeBody> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       )
                     : Container(
-                        margin: EdgeInsets.only(bottom: 10),
+                        margin: EdgeInsets.only(bottom: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
-                              children: [
-                                DropdownButton<int>(
-                                  value: selectedMovieGenreId,
-                                  hint: Text("Filmes por gênero",
-                                      style: TextStyle(color: Colors.white)),
-                                  dropdownColor: Color(0xFF292B37),
-                                  items: movieGenres.map((genre) {
-                                    return DropdownMenuItem<int>(
-                                      value: genre['id'],
-                                      child: Text(
-                                        genre['name'],
-                                        style: TextStyle(color: Colors.white),
+                            selectedTVGenreId == null
+                                ? Row(
+                                    children: [
+                                      Text(
+                                        'Filmes',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
                                       ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedMovieGenreId = value;
-                                    });
-                                    if (value != null) {
-                                      discoverMovieBloc.add(
-                                          FetchDiscoverMoviesEvent([value]));
-                                    }
-                                  },
-                                ),
-                                if (selectedMovieGenreId != null)
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        selectedMovieGenreId = null;
-                                      });
-                                      discoverMovieBloc
-                                          .add(FetchDiscoverMoviesEvent([]));
-                                    },
-                                    icon: Icon(Icons.clear,
-                                        color: Colors.white54),
-                                  ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: responsive.value({
-                                Breakpoints.xs: 20,
-                                Breakpoints.sm: 50,
-                                Breakpoints.md: 100,
-                                Breakpoints.lg: 150,
-                                Breakpoints.xl: 200,
-                              }),
-                            ),
-                            Row(
-                              children: [
-                                DropdownButton<int>(
-                                  value: selectedTVGenreId,
-                                  hint: Text("Séries por gênero",
-                                      style: TextStyle(color: Colors.white)),
-                                  dropdownColor: Color(0xFF292B37),
-                                  items: tvGenres.map((genre) {
-                                    return DropdownMenuItem<int>(
-                                      value: genre['id'],
-                                      child: Text(
-                                        genre['name'],
-                                        style: TextStyle(color: Colors.white),
+                                      SizedBox(
+                                        width: 10,
                                       ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedTVGenreId = value;
-                                    });
-                                    if (value != null) {
-                                      discoverSerieBloc.add(
-                                          FetchDiscoverSeriesEvent([value]));
-                                    }
-                                  },
-                                ),
-                                if (selectedTVGenreId != null)
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        selectedTVGenreId = null;
-                                      });
-                                      discoverSerieBloc
-                                          .add(FetchDiscoverSeriesEvent([]));
-                                    },
-                                    icon: Icon(Icons.clear,
-                                        color: Colors.white54),
-                                  ),
-                              ],
-                            ),
+                                      DropdownButton<int>(
+                                        value: selectedMovieGenreId,
+                                        hint: Text("selecione o gênero",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        dropdownColor: Color(0xFF292B37),
+                                        items: movieGenres.map((genre) {
+                                          return DropdownMenuItem<int>(
+                                            value: genre['id'],
+                                            child: Text(
+                                              genre['name'],
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectedMovieGenreId = value;
+                                          });
+                                          if (value != null) {
+                                            discoverMovieBloc.add(
+                                                FetchDiscoverMoviesEvent(
+                                                    [value]));
+                                          }
+                                        },
+                                      ),
+                                      if (selectedMovieGenreId != null)
+                                        IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              selectedMovieGenreId = null;
+                                            });
+                                            discoverMovieBloc.add(
+                                                FetchDiscoverMoviesEvent([]));
+                                          },
+                                          icon: Icon(Icons.clear,
+                                              color: Colors.white54),
+                                        ),
+                                    ],
+                                  )
+                                : Container(),
+                            selectedMovieGenreId == null &&
+                                    selectedTVGenreId == null
+                                ? SizedBox(
+                                    width: responsive.value({
+                                      Breakpoints.xs: 20,
+                                      Breakpoints.sm: 50,
+                                      Breakpoints.md: 100,
+                                      Breakpoints.lg: 150,
+                                      Breakpoints.xl: 200,
+                                    }),
+                                  )
+                                : Container(),
+                            selectedMovieGenreId == null
+                                ? Row(
+                                    children: [
+                                      Text(
+                                        'Séries',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      DropdownButton<int>(
+                                        value: selectedTVGenreId,
+                                        hint: Text("selecione o gênero",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                        dropdownColor: Color(0xFF292B37),
+                                        items: tvGenres.map((genre) {
+                                          return DropdownMenuItem<int>(
+                                            value: genre['id'],
+                                            child: Text(
+                                              genre['name'],
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectedTVGenreId = value;
+                                          });
+                                          if (value != null) {
+                                            discoverSerieBloc.add(
+                                                FetchDiscoverSeriesEvent(
+                                                    [value]));
+                                          }
+                                        },
+                                      ),
+                                      if (selectedTVGenreId != null)
+                                        IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              selectedTVGenreId = null;
+                                            });
+                                            discoverSerieBloc.add(
+                                                FetchDiscoverSeriesEvent([]));
+                                          },
+                                          icon: Icon(Icons.clear,
+                                              color: Colors.white54),
+                                        ),
+                                    ],
+                                  )
+                                : Container(),
                           ],
                         ),
                       ),
