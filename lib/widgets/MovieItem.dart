@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/widgets/FavoriteMovie.dart';
-import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 
 class MovieItem extends HookWidget {
   final MultiModel movie;
@@ -47,7 +43,8 @@ class MovieItem extends HookWidget {
                       topRight: Radius.circular(10),
                     ),
                     child: Image.network(
-                      movie.posterPath!,
+                      // Se movie.posterPath for nulo, usa uma imagem padrão
+                      movie.posterPath ?? 'https://via.placeholder.com/250x300',
                       height: 300,
                       width: 250,
                       fit: BoxFit.fill,
@@ -70,7 +67,8 @@ class MovieItem extends HookWidget {
                               Icon(Icons.star, color: Colors.amber),
                               SizedBox(width: 4),
                               Text(
-                                movie.voteAverage!.toStringAsFixed(1),
+                                // Se movie.voteAverage for nulo, usa 0.0
+                                (movie.voteAverage ?? 0.0).toStringAsFixed(1),
                                 style: TextStyle(
                                   color: Colors.white54,
                                   fontSize: 14,
@@ -84,10 +82,7 @@ class MovieItem extends HookWidget {
                           decoration: BoxDecoration(
                               color: Color.fromARGB(101, 255, 255, 255),
                               borderRadius: BorderRadius.circular(20)),
-                          child: BlocProvider.value(
-                            value: context.read<MovieBloc>(),
-                            child: FavoriteMovie(movie: movie),
-                          ),
+                          child: FavoriteMovie(movie: movie),
                         )
                       ],
                     ),
@@ -112,7 +107,8 @@ class MovieItem extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title!,
+                      // Se movie.title for nulo, usa "Título Desconhecido"
+                      movie.title ?? 'Título Desconhecido',
                       style: TextStyle(
                         color: Color(0xFF00A470),
                         fontSize: 15,
@@ -123,7 +119,10 @@ class MovieItem extends HookWidget {
                     ),
                     SizedBox(height: 3),
                     Text(
-                      DateTime.parse(movie.releaseDate!).year.toString(),
+                      // Se movie.releaseDate for nulo, usa "Data Desconhecida"
+                      movie.releaseDate != null
+                          ? DateTime.parse(movie.releaseDate!).year.toString()
+                          : 'Data Desconhecida',
                       style: TextStyle(
                         color: Colors.white54,
                       ),
