@@ -15,7 +15,9 @@ class FavoriteMovie extends StatelessWidget {
       onTap: () {
         context.read<MovieBloc>().add(ToggleFavoriteEvent(movie));
       },
-      child: BlocBuilder<MovieBloc, MovieState>(
+       
+       
+        child: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           bool isFavorite = false;
           if (state is MoviesLoadedState) {
