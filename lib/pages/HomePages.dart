@@ -103,6 +103,111 @@ class _HomeBodyState extends State<HomeBody> {
     final multiBloc = context.read<MultiBloc>();
     final discoverSerieBloc = context.read<DiscoverSerieBloc>();
     final discoverMovieBloc = context.read<DiscoverMovieBloc>();
+    final List<Widget> genreSelectionWidgets = [
+      selectedTVGenreId == null
+          ? Row(
+              children: [
+                Text(
+                  'Filmes',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                DropdownButton<int>(
+                  value: selectedMovieGenreId,
+                  hint: Text("selecione o gênero",
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: Color(0xFF292B37),
+                  items: movieGenres.map((genre) {
+                    return DropdownMenuItem<int>(
+                      value: genre['id'],
+                      child: Text(
+                        genre['name'],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedMovieGenreId = value;
+                    });
+                    if (value != null) {
+                      discoverMovieBloc.add(FetchDiscoverMoviesEvent([value]));
+                    }
+                  },
+                ),
+                if (selectedMovieGenreId != null)
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedMovieGenreId = null;
+                      });
+                      discoverMovieBloc.add(FetchDiscoverMoviesEvent([]));
+                    },
+                    icon: Icon(Icons.clear, color: Colors.white54),
+                  ),
+              ],
+            )
+          : Container(),
+      selectedMovieGenreId == null && selectedTVGenreId == null
+          ? SizedBox(
+              width: responsive.value({
+                Breakpoints.xs: 10,
+                Breakpoints.sm: 10,
+                Breakpoints.md: 100,
+                Breakpoints.lg: 150,
+                Breakpoints.xl: 200,
+              }),
+            )
+          : Container(),
+      selectedMovieGenreId == null
+          ? Row(
+              children: [
+                Text(
+                  'Séries',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                DropdownButton<int>(
+                  value: selectedTVGenreId,
+                  hint: Text("selecione o gênero",
+                      style: TextStyle(color: Colors.white)),
+                  dropdownColor: Color(0xFF292B37),
+                  items: tvGenres.map((genre) {
+                    return DropdownMenuItem<int>(
+                      value: genre['id'],
+                      child: Text(
+                        genre['name'],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedTVGenreId = value;
+                    });
+                    if (value != null) {
+                      discoverSerieBloc.add(FetchDiscoverSeriesEvent([value]));
+                    }
+                  },
+                ),
+                if (selectedTVGenreId != null)
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedTVGenreId = null;
+                      });
+                      discoverSerieBloc.add(FetchDiscoverSeriesEvent([]));
+                    },
+                    icon: Icon(Icons.clear, color: Colors.white54),
+                  ),
+              ],
+            )
+          : Container(),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -198,129 +303,23 @@ class _HomeBodyState extends State<HomeBody> {
                       )
                     : Container(
                         margin: EdgeInsets.only(bottom: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            selectedTVGenreId == null
-                                ? Row(
-                                    children: [
-                                      Text(
-                                        'Filmes',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      DropdownButton<int>(
-                                        value: selectedMovieGenreId,
-                                        hint: Text("selecione o gênero",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                        dropdownColor: Color(0xFF292B37),
-                                        items: movieGenres.map((genre) {
-                                          return DropdownMenuItem<int>(
-                                            value: genre['id'],
-                                            child: Text(
-                                              genre['name'],
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          );
-                                        }).toList(),
-                                        onChanged: (value) {
-                                          setState(() {
-                                            selectedMovieGenreId = value;
-                                          });
-                                          if (value != null) {
-                                            discoverMovieBloc.add(
-                                                FetchDiscoverMoviesEvent(
-                                                    [value]));
-                                          }
-                                        },
-                                      ),
-                                      if (selectedMovieGenreId != null)
-                                        IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              selectedMovieGenreId = null;
-                                            });
-                                            discoverMovieBloc.add(
-                                                FetchDiscoverMoviesEvent([]));
-                                          },
-                                          icon: Icon(Icons.clear,
-                                              color: Colors.white54),
-                                        ),
-                                    ],
-                                  )
-                                : Container(),
-                            selectedMovieGenreId == null &&
-                                    selectedTVGenreId == null
-                                ? SizedBox(
-                                    width: responsive.value({
-                                      Breakpoints.xs: 20,
-                                      Breakpoints.sm: 50,
-                                      Breakpoints.md: 100,
-                                      Breakpoints.lg: 150,
-                                      Breakpoints.xl: 200,
-                                    }),
-                                  )
-                                : Container(),
-                            selectedMovieGenreId == null
-                                ? Row(
-                                    children: [
-                                      Text(
-                                        'Séries',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      DropdownButton<int>(
-                                        value: selectedTVGenreId,
-                                        hint: Text("selecione o gênero",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                        dropdownColor: Color(0xFF292B37),
-                                        items: tvGenres.map((genre) {
-                                          return DropdownMenuItem<int>(
-                                            value: genre['id'],
-                                            child: Text(
-                                              genre['name'],
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          );
-                                        }).toList(),
-                                        onChanged: (value) {
-                                          setState(() {
-                                            selectedTVGenreId = value;
-                                          });
-                                          if (value != null) {
-                                            discoverSerieBloc.add(
-                                                FetchDiscoverSeriesEvent(
-                                                    [value]));
-                                          }
-                                        },
-                                      ),
-                                      if (selectedTVGenreId != null)
-                                        IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              selectedTVGenreId = null;
-                                            });
-                                            discoverSerieBloc.add(
-                                                FetchDiscoverSeriesEvent([]));
-                                          },
-                                          icon: Icon(Icons.clear,
-                                              color: Colors.white54),
-                                        ),
-                                    ],
-                                  )
-                                : Container(),
-                          ],
-                        ),
+                        child: responsive.value({
+                          Breakpoints.xs: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: genreSelectionWidgets),
+                          Breakpoints.sm: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: genreSelectionWidgets),
+                          Breakpoints.md: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: genreSelectionWidgets),
+                          Breakpoints.lg: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: genreSelectionWidgets),
+                          Breakpoints.xl: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: genreSelectionWidgets),
+                        }),
                       ),
               ],
             ),

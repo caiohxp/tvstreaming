@@ -3,8 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/movie_bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/widgets/FavoriteMovie.dart';
 import 'package:projeto_modulo_4/widgets/MovieItem.dart';
 
 class NewMoviesWidget extends HookWidget {

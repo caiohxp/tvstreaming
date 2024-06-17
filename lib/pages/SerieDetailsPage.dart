@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/model/Multi_model.dart';
 import 'package:projeto_modulo_4/widgets/FavoriteSerie.dart';
+import 'package:responsive_styles/breakpoints/breakpoints.dart';
+import 'package:responsive_styles/responsive/responsive.dart';
 import '../bloc/Genre_Bloc.dart';
 import '../model/Genres_model.dart';
 
@@ -14,6 +16,7 @@ class SerieDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var responsive = Responsive(context);
     return BlocProvider(
       create: (context) => SerieGenreBloc()..add(FetchSerieGenres()),
       child: Material(
@@ -80,12 +83,26 @@ class SerieDetailsPage extends StatelessWidget {
                   Container(
                     margin:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    child: Text(
-                      '${serie?.name ?? ''}',
-                      style: TextStyle(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: responsive.value({
+                          Breakpoints.xs: 300,
+                          Breakpoints.sm: 400,
+                          Breakpoints.md: 1000,
+                          Breakpoints.lg: 1500,
+                          Breakpoints.xl: 2000,
+                        }),
+                      ),
+                      child: Text(
+                        '${serie?.name ?? ''}',
+                        style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 0, 164, 112)),
+                          color: Color.fromARGB(255, 0, 164, 112),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                   BlocProvider.value(
