@@ -14,6 +14,8 @@ class FavoriteSerie extends StatelessWidget {
       onTap: () {
         context.read<SerieBloc>().add(ToggleFavoriteEvent(serie));
       },
+     
+     
       child: BlocBuilder<SerieBloc, SerieState>(
         builder: (context, state) {
           bool isFavorite = false;
