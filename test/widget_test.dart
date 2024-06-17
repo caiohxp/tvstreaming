@@ -1,37 +1,46 @@
-// // // This is a basic Flutter widget test.
-// // //
-// // // To perform an interaction with a widget in your test, use the WidgetTester
-// // // utility in the flutter_test package. For example, you can send tap and scroll
-// // // gestures. You can also use WidgetTester to find child widgets in the widget
-// // // tree, read text, and verify that the values of widget properties are correct.
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:projeto_modulo_4/model/Multi_model.dart';
+import 'package:projeto_modulo_4/widgets/MovieItem.dart';
+import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
 
-// // import 'package:flutter/material.dart';
-// // import 'package:flutter_test/flutter_test.dart';
+void main() {
+  testWidgets('Teste de Renderização do NewMoviesWidget',
+      (WidgetTester tester) async {
+    // Dados de teste para o NewMoviesWidget
+    final movies = [
+      MultiModel(
+        id: 1,
+        mediaType: 'movie',
+        title: 'Filme 1',
+        overview: 'Overview do Filme 1',
+        posterPath: '/path1.jpg',
+        genreIds: [1, 2],
+        voteAverage: 8.5,
+        releaseDate: '2023-01-01',
+      ),
+      MultiModel(
+        id: 2,
+        mediaType: 'movie',
+        title: 'Filme 2',
+        overview: 'Overview do Filme 2',
+        posterPath: '/path2.jpg',
+        genreIds: [3, 4],
+        voteAverage: 7.5,
+        releaseDate: '2023-02-01',
+      ),
+    ];
 
-// // import 'package:projeto_modulo_4/main.dart';
+    // Renderiza o widget NewMoviesWidget para teste
+    await tester.pumpWidget(MaterialApp(
+      home: NewMoviesWidget(movies: movies),
+    ));
 
-// <<<<<<< HEAD
-// // void main() {
-// //   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-// //     // Build our app and trigger a frame.
-// //     await tester.pumpWidget(const MyApp());
-// =======
-// void main() {
-//   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-//     // Build our app and trigger a frame.
-//     await tester.pumpWidget(MyApp());
-// >>>>>>> 569d9411c9abb8bd25c4e3c06a7c3ede5e09eed6
-
-// //     // Verify that our counter starts at 0.
-// //     expect(find.text('0'), findsOneWidget);
-// //     expect(find.text('1'), findsNothing);
-
-// //     // Tap the '+' icon and trigger a frame.
-// //     await tester.tap(find.byIcon(Icons.add));
-// //     await tester.pump();
-
-// //     // Verify that our counter has incremented.
-// //     expect(find.text('0'), findsNothing);
-// //     expect(find.text('1'), findsOneWidget);
-// //   });
-// // }
+    // Verifica se os elementos dos filmes são renderizados corretamente
+    expect(find.text('Filmes recentes'), findsOneWidget);
+    expect(find.text('Filme 1'), findsOneWidget);
+    expect(find.text('Filme 2'), findsOneWidget);
+    expect(find.byType(MovieItem),
+        findsNWidgets(2)); // Verifica se há dois MovieItems
+  });
+}

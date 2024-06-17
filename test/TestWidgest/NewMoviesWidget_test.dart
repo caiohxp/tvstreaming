@@ -40,6 +40,6 @@ void main() {
     final TextStyle? textStyle = tester.widget<Text>(textWidget).style;
 
     // Verificar o tamanho da fonte
-    expect(textStyle?.fontSize, 25); // Verificar se o tamanho da fonte é 25
+    expect(textStyle?.fontSize, 25); 
   });
 }
