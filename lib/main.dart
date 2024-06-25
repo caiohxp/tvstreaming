@@ -8,6 +8,7 @@ import 'package:projeto_modulo_4/pages/HomePages.dart';
 import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
+import 'package:projeto_modulo_4/pages/login/LoginPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xFF0F111D),
         ),
         routes: {
-          "/": (context) => HomePage(),
+          "/": (context) => LoginWidget(),
+          "homePage": (context) => HomePage(),
           "categoryPage": (context) => CategoryPage(),
           "movieDetailsPage": (context) => MovieDetailsPage(movie: null),
         },

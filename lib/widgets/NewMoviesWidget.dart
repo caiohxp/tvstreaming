@@ -18,7 +18,7 @@ class NewMoviesWidget extends HookWidget {
           child: Row(
             children: [
               Text(
-                "Filmes recentes",
+                "Filmes ",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
