@@ -23,7 +23,7 @@ class NewSeriesWidget extends HookWidget {
           child: Row(
             children: [
               Text(
-                "Séries recentes",
+                "Séries",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
