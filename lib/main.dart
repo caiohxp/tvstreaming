@@ -8,7 +8,9 @@ import 'package:projeto_modulo_4/pages/HomePages.dart';
 import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/pages/login/LoginPage.dart';
+import 'package:projeto_modulo_4/pages/login/SplashLoginPage.dart';
+
+
 
 void main() {
   runApp(MyApp());
