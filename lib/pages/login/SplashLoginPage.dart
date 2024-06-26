@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:projeto_modulo_4/Animations/FadeAnimations.dart';
 import 'package:projeto_modulo_4/pages/HomePages.dart';
+import 'package:projeto_modulo_4/pages/login/ViewLoginPage.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -76,10 +78,12 @@ class _LoginWidgetState extends State<LoginWidget>
         Tween<double>(begin: 1.0, end: 32.0).animate(_scale2Controller)
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {}
-       
-        Navigator.push(context, PageTransition(type: PageTransitionType.fade, child:HomePage()));
-        
-        });
+
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: LoginPage()));
+          });
   }
 
   @override
