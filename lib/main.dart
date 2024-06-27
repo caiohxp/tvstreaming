@@ -9,6 +9,7 @@ import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
 import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
 import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
 import 'package:projeto_modulo_4/pages/login/SplashLoginPage.dart';
+import 'package:projeto_modulo_4/pages/login/ViewLoginPage.dart';
 
 
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           "/": (context) => LoginWidget(),
+          "loginPage": (context) => LoginPage(),
           "homePage": (context) => HomePage(),
           "categoryPage": (context) => CategoryPage(),
           "movieDetailsPage": (context) => MovieDetailsPage(movie: null),
