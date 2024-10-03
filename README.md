@@ -1,4 +1,5 @@
 App de Filmes e Séries
+
 Um projeto desenvolvido durante o Programa Desenvolve do Grupo Boticário em parceria com Caio Cesar Moreira de Souza. Este aplicativo oferece uma experiência completa para navegação, busca e organização de filmes e séries, proporcionando uma interface amigável e moderna.
 
 Descrição
