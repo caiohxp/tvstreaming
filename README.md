@@ -1,20 +1,52 @@
-# projeto_modulo_4
+CineVault
 
-instruções para branchs e commits
-- Abrir as branchs com os números e títulos dos card e dentro da pasta feature, por exemplo: feature/0001-first-taks
-- Nomear os commits com o número do card entre colchetes e seguido do texto de alteração conforme o conventional commits, por exemplo: [0001] first commit
+CineVault é um aplicativo de filmes e séries que permite aos usuários explorar, buscar e organizar seus filmes e séries favoritos. Ele oferece detalhes sobre lançamentos, categorias e informações de cada título. Construído em Flutter, com integração à API do The Movie Database (TMDb), o aplicativo oferece uma experiência rápida.
 
-A new Flutter project.
+Funcionalidades
+🌟 Busca: Pesquise por filmes e séries utilizando palavras-chave.
+📋 Categorias: Navegue por gêneros, como ação, comédia, drama, etc.
+💖 Favoritos: Adicione filmes e séries à sua lista de favoritos para acessar facilmente depois.
+📜 Detalhes: Veja sinopse, elenco, classificação e outros detalhes de cada título.
+🖼️ Cards Visuais: Interface moderna com cards que destacam filmes e séries populares.
+🎬 Integração com API do TMDb: Dados atualizados e precisos sobre milhares de títulos.
+Instalação
+Para rodar o projeto localmente, siga os seguintes passos:
 
-## Getting Started
+Clone o repositório:
 
-This project is a starting point for a Flutter application.
+bash
+Copiar código
+git clone https://github.com/usuario/nome-do-repositorio.git
+Acesse o diretório do projeto:
 
-A few resources to get you started if this is your first Flutter project:
+bash
+Copiar código
+cd nome-do-repositorio
+Instale as dependências:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+bash
+Copiar código
+flutter pub get
+Execute o aplicativo:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+bash
+Copiar código
+flutter run
+Pré-requisitos
+Flutter versão 2.0 ou superior.
+Dart versão 2.12 ou superior.
+API do TMDb: Você precisará de uma chave de API do The Movie Database.
+Uso
+Explique brevemente como o aplicativo funciona ou como o usuário pode interagir com ele. Pode incluir capturas de tela:
+
+Tela de Splash.
+Tela de Login.
+Tela de Exploração com categorias.
+Tela de Detalhes do Filme.
+Tela de Favoritos.
+Tecnologias Utilizadas
+Flutter e Dart: Desenvolvimento mobile.
+API TMDb: Fornecimento de dados sobre filmes e séries.
+Bloc: Gerenciamento de estado.
+SharedPreferences: Armazenamento de dados local (favoritos).
+Testes: Testes unitários e de widgets com Bloc.
