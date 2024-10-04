@@ -14,6 +14,7 @@ Favoritos: Marque e salve filmes e séries para fácil acesso posteriormente.
 
 
 ## Funcionalidades
+
 📱 Tela de Splash para uma introdução visual atraente.
 🔐 Tela de Login para garantir segurança no acesso ao conteúdo.
 🎬 Exibição de filmes e séries por cards, mostrando detalhes como título, sinopse e elenco.
@@ -23,6 +24,7 @@ Favoritos: Marque e salve filmes e séries para fácil acesso posteriormente.
 
 
 ## Tecnologias Utilizadas
+
 Flutter: Framework para desenvolvimento mobile.
 Dart: Linguagem de programação utilizada.
 API do Movie Database: Fonte de dados para os filmes e séries.
