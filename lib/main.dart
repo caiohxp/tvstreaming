@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/bloc/DIscoverMovie_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/DiscoverSerie_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/Genre_Bloc.dart';
-import 'package:projeto_modulo_4/pages/CategoryPage.dart';
-import 'package:projeto_modulo_4/pages/HomePages.dart';
-import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
-import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/pages/login/SplashLoginPage.dart';
-import 'package:projeto_modulo_4/pages/login/ViewLoginPage.dart';
+import 'package:tvabertaflix/bloc/DIscoverMovie_Bloc.dart';
+import 'package:tvabertaflix/bloc/DiscoverSerie_Bloc.dart';
+import 'package:tvabertaflix/bloc/Genre_Bloc.dart';
+import 'package:tvabertaflix/pages/CategoryPage.dart';
+import 'package:tvabertaflix/pages/HomePages.dart';
+import 'package:tvabertaflix/bloc/Movie_Bloc.dart';
+import 'package:tvabertaflix/bloc/Serie_Bloc.dart';
+import 'package:tvabertaflix/pages/MovieDetailsPage.dart';
+import 'package:tvabertaflix/pages/login/SplashLoginPage.dart';
+import 'package:tvabertaflix/pages/login/ViewLoginPage.dart';
 
 
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor: Color(0xFF0F111D),
+          scaffoldBackgroundColor: Color.fromARGB(255, 32, 31, 31),
         ),
         routes: {
           "/": (context) => LoginWidget(),

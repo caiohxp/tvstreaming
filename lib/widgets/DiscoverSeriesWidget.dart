@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
+import 'package:tvabertaflix/pages/SerieDetailsPage.dart';
 
 class DiscoverSeriesWidget extends HookWidget {
   final List<MultiModel> series;

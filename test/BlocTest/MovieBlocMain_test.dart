@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
+import 'package:tvabertaflix/bloc/Movie_Bloc.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

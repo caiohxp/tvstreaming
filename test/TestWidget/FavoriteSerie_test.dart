@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:projeto_modulo_4/widgets/FavoriteMoviesWidget.dart';
+import 'package:tvabertaflix/widgets/FavoriteMoviesWidget.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
 
 void main() {

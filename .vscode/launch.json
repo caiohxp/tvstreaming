@@ -8,18 +8,18 @@
 
 
         {
-            "name": "projeto_modulo4",
+            "name": "tvabertaflix",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "projeto_modulo4 (profile mode)",
+            "name": "tvabertaflix (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "projeto_modulo4 (release mode)",
+            "name": "tvabertaflix (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

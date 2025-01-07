@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
-import 'package:projeto_modulo_4/widgets/FavoriteSerie.dart';
-import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
+import 'package:tvabertaflix/bloc/Serie_Bloc.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
+import 'package:tvabertaflix/pages/SerieDetailsPage.dart';
+import 'package:tvabertaflix/widgets/FavoriteSerie.dart';
+import 'package:tvabertaflix/widgets/NewSeriesWidget.dart';
 
 class SerieItem extends HookWidget {
   final MultiModel? serie;
@@ -113,7 +113,7 @@ class SerieItem extends HookWidget {
                     Text(
                       serie?.name ?? '',
                       style: TextStyle(
-                        color: Color(0xFF00A470),
+                        color: Color.fromARGB(255, 125, 49, 71),
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),

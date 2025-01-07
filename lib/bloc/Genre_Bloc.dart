@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:projeto_modulo_4/model/Genres_model.dart';
+import 'package:tvabertaflix/model/Genres_model.dart';
 
 // Events
 abstract class GenreEvent {}

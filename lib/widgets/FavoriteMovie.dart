@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
+import 'package:tvabertaflix/bloc/Movie_Bloc.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
 
 class FavoriteMovie extends StatelessWidget {
   final MultiModel movie;

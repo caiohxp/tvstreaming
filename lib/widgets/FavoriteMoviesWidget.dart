@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/pages/MovieDetailsPage.dart';
-import 'package:projeto_modulo_4/pages/SerieDetailsPage.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
+import 'package:tvabertaflix/pages/MovieDetailsPage.dart';
+import 'package:tvabertaflix/pages/SerieDetailsPage.dart';
 import 'package:responsive_styles/breakpoints/breakpoints.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
 

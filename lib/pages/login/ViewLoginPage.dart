@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:projeto_modulo_4/pages/HomePages.dart';
+import 'package:tvabertaflix/pages/HomePages.dart';
 
 class LoginPage extends StatefulWidget {
   @override

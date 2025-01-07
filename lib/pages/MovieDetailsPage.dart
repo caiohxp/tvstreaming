@@ -2,11 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/bloc/Genre_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
-import 'package:projeto_modulo_4/model/Genres_model.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/widgets/FavoriteMovie.dart';
+import 'package:tvabertaflix/bloc/Genre_Bloc.dart';
+import 'package:tvabertaflix/bloc/Movie_Bloc.dart';
+import 'package:tvabertaflix/model/Genres_model.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
+import 'package:tvabertaflix/widgets/FavoriteMovie.dart';
 import 'package:responsive_styles/breakpoints/breakpoints.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
 
@@ -60,11 +60,11 @@ class MovieDetailsPage extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 0, 164, 112),
+                        color: Color.fromARGB(255, 125, 49, 71),
                         borderRadius: BorderRadius.circular(50)),
                     child: Ink(
                       decoration: const ShapeDecoration(
-                        color: Color.fromARGB(255, 0, 164, 112),
+                        color: Color.fromARGB(255, 125, 49, 71),
                         shape: CircleBorder(),
                       ),
                       child: IconButton(
@@ -99,7 +99,7 @@ class MovieDetailsPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 0, 164, 112),
+                          color: Color.fromARGB(255, 125, 49, 71),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

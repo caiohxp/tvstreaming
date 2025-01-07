@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:projeto_modulo_4/Animations/FadeAnimations.dart';
-import 'package:projeto_modulo_4/pages/HomePages.dart';
-import 'package:projeto_modulo_4/pages/login/ViewLoginPage.dart';
+import 'package:tvabertaflix/Animations/FadeAnimations.dart';
+import 'package:tvabertaflix/pages/HomePages.dart';
+import 'package:tvabertaflix/pages/login/ViewLoginPage.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});

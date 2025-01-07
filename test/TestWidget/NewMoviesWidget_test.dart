@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
+import 'package:tvabertaflix/widgets/NewMoviesWidget.dart';
 
 void main() {
   testWidgets('"Filmes recentes:" Teste da cor do texto ', (WidgetTester tester) async {

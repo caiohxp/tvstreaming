@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/bloc/DiscoverMovie_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/DiscoverSerie_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/Movie_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/Multi_Bloc.dart';
-import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/widgets/DiscoverMoviesWidget.dart';
-import 'package:projeto_modulo_4/widgets/DiscoverSeriesWidget.dart';
-import 'package:projeto_modulo_4/widgets/FavoriteMoviesWidget.dart';
-import 'package:projeto_modulo_4/widgets/MultiSearchWidget.dart';
-import 'package:projeto_modulo_4/widgets/NewMoviesWidget.dart';
-import 'package:projeto_modulo_4/widgets/NewSeriesWidget.dart';
-import 'package:projeto_modulo_4/widgets/UpcomingWidget.dart';
+import 'package:tvabertaflix/bloc/DiscoverMovie_Bloc.dart';
+import 'package:tvabertaflix/bloc/DiscoverSerie_Bloc.dart';
+import 'package:tvabertaflix/bloc/Movie_Bloc.dart';
+import 'package:tvabertaflix/bloc/Multi_Bloc.dart';
+import 'package:tvabertaflix/bloc/Serie_Bloc.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
+import 'package:tvabertaflix/widgets/DiscoverMoviesWidget.dart';
+import 'package:tvabertaflix/widgets/DiscoverSeriesWidget.dart';
+import 'package:tvabertaflix/widgets/FavoriteMoviesWidget.dart';
+import 'package:tvabertaflix/widgets/MultiSearchWidget.dart';
+import 'package:tvabertaflix/widgets/NewMoviesWidget.dart';
+import 'package:tvabertaflix/widgets/NewSeriesWidget.dart';
+import 'package:tvabertaflix/widgets/UpcomingWidget.dart';
 import 'package:responsive_styles/breakpoints/breakpoints.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
 
@@ -110,11 +110,11 @@ class _HomeBodyState extends State<HomeBody> {
       appBar: AppBar(
         toolbarHeight: 70,
         title: Text(
-          'Cinesquad',
+          'TV Aberta SP',
           style: TextStyle(
-              color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+              color: const Color.fromARGB(255, 125, 49, 71), fontSize: 28, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Color(0xFF0F111D),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 100,
         actions: [
           IconButton(
@@ -138,7 +138,7 @@ class _HomeBodyState extends State<HomeBody> {
                     Breakpoints.xl: 300,
                   }),
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 39, 43, 66),
+                      color: Color.fromARGB(255, 125, 49, 71),
                       borderRadius: BorderRadius.circular(20)),
                   padding: EdgeInsets.only(left: 20),
                   child: TextField(
@@ -172,7 +172,7 @@ class _HomeBodyState extends State<HomeBody> {
                 )
               : IconButton(
                   icon: Icon(isSearching ? Icons.clear : Icons.search,
-                      color: Colors.white),
+                      color: const Color.fromARGB(255, 125, 49, 71)),
                   onPressed: () {
                     setState(() {
                       if (isSearching) {
@@ -221,7 +221,7 @@ class _HomeBodyState extends State<HomeBody> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: Color.fromARGB(
-                                                    255, 0, 164, 112)),
+                                                    255, 125, 49, 71)),
                                             child: Text(
                                               'Filmes',
                                               style: TextStyle(
@@ -307,7 +307,7 @@ class _HomeBodyState extends State<HomeBody> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                                 backgroundColor: Color.fromARGB(
-                                                    255, 0, 164, 112)),
+                                                    255, 125, 49, 71)),
                                             child: Text(
                                               'Séries',
                                               style: TextStyle(

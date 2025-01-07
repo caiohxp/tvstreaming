@@ -24,7 +24,7 @@ class CustomNavBar extends StatelessWidget {
             child: const Icon(
               Icons.home,
               size: 35,
-              color: Color(0xFF00A470),
+              color: Color.fromARGB(255, 125, 49, 71),
             ),
           ),
           InkWell(
@@ -34,7 +34,7 @@ class CustomNavBar extends StatelessWidget {
             child: const Icon(
               Icons.favorite,
               size: 35,
-              color: Color(0xFF00A470),
+              color: Color.fromARGB(255, 125, 49, 71),
             ),
           )
         ],

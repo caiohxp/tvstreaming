@@ -1,4 +1,4 @@
-package com.example.projeto_modulo4
+package com.example.tvabertaflix
 
 import io.flutter.embedding.android.FlutterActivity
 

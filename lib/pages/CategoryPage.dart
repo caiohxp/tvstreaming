@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_modulo_4/widgets/CustomNavBar.dart';
+import 'package:tvabertaflix/widgets/CustomNavBar.dart';
 
 
 class CategoryPage extends StatelessWidget{

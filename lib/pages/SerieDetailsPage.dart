@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_modulo_4/bloc/Serie_Bloc.dart';
-import 'package:projeto_modulo_4/model/Multi_model.dart';
-import 'package:projeto_modulo_4/widgets/FavoriteSerie.dart';
+import 'package:tvabertaflix/bloc/Serie_Bloc.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
+import 'package:tvabertaflix/widgets/FavoriteSerie.dart';
 import 'package:responsive_styles/breakpoints/breakpoints.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
 import '../bloc/Genre_Bloc.dart';
@@ -59,11 +59,11 @@ class SerieDetailsPage extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 0, 164, 112),
+                        color: Color.fromARGB(255, 125, 49, 71),
                         borderRadius: BorderRadius.circular(50)),
                     child: Ink(
                       decoration: const ShapeDecoration(
-                        color: Color.fromARGB(255, 0, 164, 112),
+                        color: Color.fromARGB(255, 125, 49, 71),
                         shape: CircleBorder(),
                       ),
                       child: IconButton(
@@ -98,7 +98,7 @@ class SerieDetailsPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 0, 164, 112),
+                          color: Color.fromARGB(255, 125, 49, 71),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:projeto_modulo_4/model/Multi_model.dart';
+import 'package:tvabertaflix/model/Multi_model.dart';
 import 'dart:convert';
 
 abstract class DiscoverSerieEvent {}
