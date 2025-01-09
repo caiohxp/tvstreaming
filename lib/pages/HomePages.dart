@@ -463,14 +463,7 @@ class _HomeBodyState extends State<HomeBody> {
                                     return ListView(
                                       padding: EdgeInsets.all(10),
                                       children: [
-                                        SizedBox(height: 20),
-                                        YouTubeVideoWidget(videoIds: [
-                                            'https://www.youtube.com/watch?v=1wBpX0iFl5E',
-                                            'https://www.youtube.com/watch?v=5AxWC49ZMzs',
-                                            'https://www.youtube.com/watch?v=JSqUZFkRLr8',
-                                            'https://www.youtube.com/watch?v=qEZf2q4W20g',
-                                            'https://www.youtube.com/watch?v=jCbclWBV32o'
-                                          ]),
+                                        
                                         SizedBox(height: 20),
                                         NewMoviesWidget(movies: movies),
                                         SizedBox(height: 20),
