@@ -35,9 +35,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color.fromARGB(255, 32, 31, 31),
         ),
         routes: {
-          "/": (context) => LoginWidget(),
-          "loginPage": (context) => LoginPage(),
-          "homePage": (context) => HomePage(),
+          "/": (context) => HomePage(),
           "categoryPage": (context) => CategoryPage(),
           "movieDetailsPage": (context) => MovieDetailsPage(movie: null),
         },

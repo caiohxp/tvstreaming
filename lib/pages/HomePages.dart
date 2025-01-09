@@ -13,6 +13,8 @@ import 'package:tvabertaflix/widgets/FavoriteMoviesWidget.dart';
 import 'package:tvabertaflix/widgets/MultiSearchWidget.dart';
 import 'package:tvabertaflix/widgets/NewMoviesWidget.dart';
 import 'package:tvabertaflix/widgets/NewSeriesWidget.dart';
+import 'package:tvabertaflix/widgets/StreamPlayerWidget.dart';
+import 'package:tvabertaflix/widgets/VideosWidget.dart';
 import 'package:tvabertaflix/widgets/UpcomingWidget.dart';
 import 'package:responsive_styles/breakpoints/breakpoints.dart';
 import 'package:responsive_styles/responsive/responsive.dart';
@@ -462,7 +464,13 @@ class _HomeBodyState extends State<HomeBody> {
                                       padding: EdgeInsets.all(10),
                                       children: [
                                         SizedBox(height: 20),
-                                        UpcomingWidget(movies: movies),
+                                        YouTubeVideoWidget(videoIds: [
+                                            'https://www.youtube.com/watch?v=1wBpX0iFl5E',
+                                            'https://www.youtube.com/watch?v=5AxWC49ZMzs',
+                                            'https://www.youtube.com/watch?v=JSqUZFkRLr8',
+                                            'https://www.youtube.com/watch?v=qEZf2q4W20g',
+                                            'https://www.youtube.com/watch?v=jCbclWBV32o'
+                                          ]),
                                         SizedBox(height: 20),
                                         NewMoviesWidget(movies: movies),
                                         SizedBox(height: 20),
